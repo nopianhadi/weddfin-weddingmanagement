@@ -90,9 +90,11 @@ const ClientPortal: React.FC<ClientPortalProps> = ({ accessId, clients, projects
         if (!clients || clients.length === 0) {
             return (
                 <div className="flex items-center justify-center min-h-screen p-4 bg-public-bg">
-                    <div className="w-full max-w-lg p-8 text-center bg-public-surface rounded-2xl shadow-lg">
-                        <h1 className="text-2xl font-bold portal-text-primary">Memuat Portal…</h1>
-                        <p className="mt-4 portal-text-secondary">Mohon tunggu sebentar.</p>
+                    <div className="flex flex-col items-center justify-center">
+                        <div className="relative flex justify-center items-center mb-6">
+                            <div className="absolute border-4 border-brand-accent/20 rounded-full w-16 h-16"></div>
+                            <div className="animate-spin border-4 border-transparent border-t-brand-accent rounded-full w-16 h-16"></div>
+                        </div>
                     </div>
                 </div>
             );

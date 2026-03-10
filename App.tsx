@@ -275,11 +275,10 @@ const BottomNavBar: React.FC<{
                             relative
                             group
                             overflow-visible
-                            ${
-                              activeView === item.view
-                                ? "text-brand-accent bg-brand-accent/10"
-                                : "text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-input/50 active:bg-brand-input"
-                            }
+                            ${activeView === item.view
+                ? "text-brand-accent bg-brand-accent/10"
+                : "text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-input/50 active:bg-brand-input"
+              }
                         `}
             aria-label={item.label}
           >
@@ -329,11 +328,10 @@ const BottomNavBar: React.FC<{
                             absolute inset-0
                             rounded-xl
                             transition-all duration-300
-                            ${
-                              activeView === item.view
-                                ? "bg-gradient-to-t from-brand-accent/10 to-transparent"
-                                : "bg-transparent group-hover:bg-brand-input/30"
-                            }
+                            ${activeView === item.view
+                  ? "bg-gradient-to-t from-brand-accent/10 to-transparent"
+                  : "bg-transparent group-hover:bg-brand-input/30"
+                }
                         `}
             />
           </button>
@@ -891,7 +889,7 @@ const App: React.FC = () => {
                 totalAmount: rec.totalAmount || 0,
                 vendorSignature: rec.vendorSignature || null,
               } as any);
-            } catch {}
+            } catch { }
           }
           window.localStorage.setItem(FLAG, "yes");
           window.localStorage.removeItem(KEY);
@@ -900,14 +898,14 @@ const App: React.FC = () => {
           console.warn("[Migration] teamPaymentRecords migration failed.", err);
         }
       })();
-    } catch {}
+    } catch { }
   }, []);
 
   // --- [NEW] Load team payment records from Supabase on init and clear legacy localStorage ---
   useEffect(() => {
     try {
       window.localStorage.removeItem("vena-teamPaymentRecords");
-    } catch {}
+    } catch { }
     let isMounted = true;
     (async () => {
       try {
@@ -946,7 +944,7 @@ const App: React.FC = () => {
   useEffect(() => {
     try {
       window.localStorage.removeItem("vena-pockets");
-    } catch {}
+    } catch { }
     let isMounted = true;
     (async () => {
       try {
@@ -985,7 +983,7 @@ const App: React.FC = () => {
   useEffect(() => {
     try {
       window.localStorage.removeItem("vena-packages");
-    } catch {}
+    } catch { }
     let isMounted = true;
     (async () => {
       try {
@@ -1006,7 +1004,7 @@ const App: React.FC = () => {
   useEffect(() => {
     try {
       window.localStorage.removeItem("vena-addOns");
-    } catch {}
+    } catch { }
     let isMounted = true;
     (async () => {
       try {
@@ -1026,7 +1024,7 @@ const App: React.FC = () => {
   useEffect(() => {
     try {
       window.localStorage.removeItem("vena-leads");
-    } catch {}
+    } catch { }
     let isMounted = true;
 
     // 1. Initial fetch
@@ -1136,7 +1134,7 @@ const App: React.FC = () => {
   useEffect(() => {
     try {
       window.localStorage.removeItem("vena-profile");
-    } catch {}
+    } catch { }
     let isMounted = true;
     (async () => {
       try {
@@ -1157,7 +1155,7 @@ const App: React.FC = () => {
   useEffect(() => {
     try {
       window.localStorage.removeItem("vena-teamProjectPayments");
-    } catch {}
+    } catch { }
     let isMounted = true;
     (async () => {
       try {
@@ -1236,7 +1234,7 @@ const App: React.FC = () => {
   useEffect(() => {
     try {
       window.localStorage.removeItem("vena-projects");
-    } catch {}
+    } catch { }
   }, []);
 
   // --- [MODIFIED] Load projects from Supabase on init with REALTIME ---
@@ -1605,7 +1603,7 @@ const App: React.FC = () => {
     setCurrentUser(null);
     try {
       window.localStorage.removeItem(LAST_ROUTE_STORAGE_KEY);
-    } catch {}
+    } catch { }
     window.location.hash = "#/home";
   };
 
@@ -1868,10 +1866,10 @@ const App: React.FC = () => {
                     prev.map((p) =>
                       p.id === projectId
                         ? {
-                            ...p,
-                            amountPaid: newAmountPaid,
-                            paymentStatus: newPaymentStatus,
-                          }
+                          ...p,
+                          amountPaid: newAmountPaid,
+                          paymentStatus: newPaymentStatus,
+                        }
                         : p,
                     ),
                   );
@@ -2174,7 +2172,14 @@ const App: React.FC = () => {
     const projectId = route.split("/portal/invoice/")[1] || "";
     return (
       <Suspense
-        fallback={<div className="p-10 text-center">Memuat Invoice...</div>}
+        fallback={
+          <div className="flex flex-col items-center justify-center py-20">
+            <div className="relative flex justify-center items-center">
+              <div className="absolute border-4 border-brand-accent/20 rounded-full w-12 h-12"></div>
+              <div className="animate-spin border-4 border-transparent border-t-brand-accent rounded-full w-12 h-12"></div>
+            </div>
+          </div>
+        }
       >
         <PublicInvoice
           projectId={projectId}
@@ -2209,16 +2214,16 @@ const App: React.FC = () => {
             prev.map((p) =>
               p.id === pId
                 ? {
-                    ...p,
-                    confirmedSubStatuses: [
-                      ...(p.confirmedSubStatuses || []),
-                      sub,
-                    ],
-                    clientSubStatusNotes: {
-                      ...(p.clientSubStatusNotes || {}),
-                      [sub]: note,
-                    },
-                  }
+                  ...p,
+                  confirmedSubStatuses: [
+                    ...(p.confirmedSubStatuses || []),
+                    sub,
+                  ],
+                  clientSubStatusNotes: {
+                    ...(p.clientSubStatusNotes || {}),
+                    [sub]: note,
+                  },
+                }
                 : p,
             ),
           );
@@ -2311,8 +2316,11 @@ const App: React.FC = () => {
             >
               <Suspense
                 fallback={
-                  <div className="py-12 text-center text-brand-text-secondary">
-                    Memuat komponenâ€¦
+                  <div className="flex flex-col items-center justify-center py-24">
+                    <div className="relative flex justify-center items-center">
+                      <div className="absolute border-4 border-brand-accent/20 rounded-full w-12 h-12"></div>
+                      <div className="animate-spin border-4 border-transparent border-t-brand-accent rounded-full w-12 h-12"></div>
+                    </div>
                   </div>
                 }
               >

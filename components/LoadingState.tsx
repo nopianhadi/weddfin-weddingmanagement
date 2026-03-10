@@ -7,20 +7,22 @@ interface LoadingStateProps {
 }
 
 export const LoadingState: React.FC<LoadingStateProps> = ({
-  message = 'Memuat data...',
+  message, // Ignored
   size = 'medium',
   className = ''
 }) => {
   const sizeClasses = {
-    small: 'w-4 h-4',
-    medium: 'w-8 h-8',
-    large: 'w-12 h-12'
+    small: 'w-5 h-5',
+    medium: 'w-10 h-10',
+    large: 'w-16 h-16'
   };
 
   return (
-    <div className={`flex flex-col items-center justify-center py-8 ${className}`}>
-      <div className={`animate-spin rounded-full border-2 border-gray-300 border-t-blue-600 ${sizeClasses[size]}`}></div>
-      <p className="mt-2 text-gray-600 text-sm">{message}</p>
+    <div className={`flex flex-col items-center justify-center py-12 ${className}`}>
+      <div className="relative flex justify-center items-center">
+        <div className={`absolute border-4 border-brand-accent/20 rounded-full ${sizeClasses[size]}`}></div>
+        <div className={`animate-spin border-4 border-transparent border-t-brand-accent rounded-full ${sizeClasses[size]}`}></div>
+      </div>
     </div>
   );
 };

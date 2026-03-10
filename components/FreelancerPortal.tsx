@@ -54,10 +54,11 @@ const FreelancerPortal: React.FC<FreelancerPortalProps> = ({ accessId, teamMembe
         if (!teamMembers || teamMembers.length === 0) {
             return (
                 <div className="flex items-center justify-center min-h-screen bg-white p-4">
-                    <div className="w-full max-w-lg p-8 text-center bg-white/95 backdrop-blur-xl rounded-3xl shadow-xl border border-slate-200">
-                        <div className="text-6xl mb-4 animate-pulse">⏳</div>
-                        <h1 className="text-2xl font-bold text-slate-800">Memuat Portal…</h1>
-                        <p className="mt-4 text-slate-600">Mohon tunggu sebentar.</p>
+                    <div className="flex flex-col items-center justify-center">
+                        <div className="relative flex justify-center items-center mb-6">
+                            <div className="absolute border-4 border-brand-accent/20 rounded-full w-16 h-16"></div>
+                            <div className="animate-spin border-4 border-transparent border-t-brand-accent rounded-full w-16 h-16"></div>
+                        </div>
                     </div>
                 </div>
             );
