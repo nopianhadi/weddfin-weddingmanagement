@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Signature Pad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .signature-area {
+            width: 100%;
+            height: 300px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            cursor: crosshair;
+            background: white;
+        }
+        .button {
+            padding: 10px 20px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #2563eb;
+        }
+        .button-secondary {
+            background: #6b7280;
+        }
+        .button-secondary:hover {
+            background: #4b5563;
+        }
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: 16px; }
+        .mb-4 { margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test SignaturePad</h1>
+        <p>Klik tombol di bawah untuk menguji pad tanda tangan:</p>
+        
+        <button class="button" onclick="openSignatureModal()">Buka Pad Tanda Tangan</button>
+        
+        <div id="result" class="mt-4">
+            <h3>Hasil Tanda Tangan:</h3>
+            <div id="signature-result" style="min-height: 100px; border: 1px solid #ccc; padding: 10px; background: #f9f9f9;">
+                Belum ada tanda tangan
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="signature-modal" class="modal-overlay">
+        <div class="modal">
+            <h2>Bubuhkan Tanda Tangan Anda</h2>
+            <p class="text-center mb-4">Gunakan mouse atau jari Anda untuk menandatangani di area di bawah ini.</p>
+            
+            <canvas id="signature-canvas" class="signature-area"></canvas>
+            
+            <div class="text-center mt-4">
+                <button class="button-secondary" onclick="clearSignature()">Ulangi</button>
+                <button class="button-secondary" onclick="closeSignatureModal()">Batal</button>
+                <button class="button" onclick="saveSignature()">Simpan Tanda Tangan</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let canvas, ctx, isDrawing = false, isSigned = false, lastPoint = null;
+
+        function setupCanvas() {
+            canvas = document.getElementById('signature-canvas');
+            ctx = canvas.getContext('2d');
+            
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            console.log('Canvas setup:', { width: canvas.width, height: canvas.height });
+        }
+
+        function openSignatureModal() {
+            console.log('Opening signature modal');
+            document.getElementById('signature-modal').classList.add('active');
+            setTimeout(() => {
+                setupCanvas();
+                addEventListeners();
+            }, 100);
+        }
+
+        function closeSignatureModal() {
+            console.log('Closing signature modal');
+            document.getElementById('signature-modal').classList.remove('active');
+            clearSignature();
+        }
+
+        function addEventListeners() {
+            // Mouse events
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseleave', stopDrawing);
+            
+            // Touch events
+            canvas.addEventListener('touchstart', handleTouch);
+            canvas.addEventListener('touchmove', handleTouch);
+            canvas.addEventListener('touchend', stopDrawing);
+        }
+
+        function getCoords(e) {
+            const rect = canvas.getBoundingClientRect();
+            if (e.touches) {
+                return {
+                    x: e.touches[0].clientX - rect.left,
+                    y: e.touches[0].clientY - rect.top
+                };
+            }
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            e.preventDefault();
+            const coords = getCoords(e);
+            isDrawing = true;
+            isSigned = true;
+            lastPoint = coords;
+            ctx.beginPath();
+            ctx.moveTo(coords.x, coords.y);
+            console.log('Started drawing at:', coords);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            const coords = getCoords(e);
+            
+            if (lastPoint) {
+                ctx.quadraticCurveTo(lastPoint.x, lastPoint.y, (lastPoint.x + coords.x) / 2, (lastPoint.y + coords.y) / 2);
+                ctx.stroke();
+            }
+            
+            lastPoint = coords;
+        }
+
+        function stopDrawing() {
+            if (!isDrawing) return;
+            isDrawing = false;
+            lastPoint = null;
+            console.log('Stopped drawing');
+        }
+
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 
+                                            e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            
+            if (e.type === 'touchstart') startDrawing(mouseEvent);
+            else if (e.type === 'touchmove') draw(mouseEvent);
+        }
+
+        function clearSignature() {
+            if (canvas) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                isSigned = false;
+                console.log('Signature cleared');
+            }
+        }
+
+        function saveSignature() {
+            if (!isSigned) {
+                alert('Mohon bubuhkan tanda tangan terlebih dahulu.');
+                return;
+            }
+            
+            const dataUrl = canvas.toDataURL('image/png');
+            console.log('Signature saved:', dataUrl.substring(0, 50) + '...');
+            
+            // Display result
+            const img = document.createElement('img');
+            img.src = dataUrl;
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            img.style.border = '1px solid #ccc';
+            
+            const resultDiv = document.getElementById('signature-result');
+            resultDiv.innerHTML = '';
+            resultDiv.appendChild(img);
+            
+            closeSignatureModal();
+        }
+    </script>
+</body>
+</html>

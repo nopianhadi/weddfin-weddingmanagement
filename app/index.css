@@ -1,0 +1,4772 @@
+/* Text gradient override for black text */
+.text-gradient {
+  color: #000000;
+  background: none;
+  background-clip: initial;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+}
+
+/* iOS/iPad: visually scale inputs smaller without reducing font-size (avoid auto-zoom) */
+@media (max-width: 1024px) {
+  .ios .form-compact.form-compact--ios-scale input.input-field,
+  .ios .form-compact.form-compact--ios-scale select.input-field,
+  .ios .form-compact.form-compact--ios-scale textarea.input-field,
+  .ios .form-compact.form-compact--ios-scale .input-with-icon input,
+  .ios .form-compact.form-compact--ios-scale input[type="date"].input-field {
+    transform: scale(0.9);
+    transform-origin: top left;
+    will-change: transform;
+  }
+
+/* Compact variant: shrink text and numbers for the freelancer payment slip */
+.print-slip-compact {
+  font-size: 0.9rem; /* ~14.4px base */
+}
+.print-slip-compact h1 { font-size: 1.5rem; }
+.print-slip-compact h2 { font-size: 1.1rem; }
+.print-slip-compact h3 { font-size: 1rem; }
+.print-slip-compact p,
+.print-slip-compact span,
+.print-slip-compact li { font-size: 0.9rem; line-height: 1.35; }
+.print-slip-compact table { font-size: 0.85rem; }
+.print-slip-compact th,
+.print-slip-compact td { padding: 6px 8px; }
+.print-slip-compact .invoice-totals .font-bold { font-size: 1rem; }
+.print-slip-compact .text-right,
+.print-slip-compact .tabular-nums,
+.print-slip-compact .amount { font-size: 0.95rem; }
+
+@media (max-width: 640px) {
+  .print-slip-compact { font-size: 0.85rem; }
+  .print-slip-compact table { font-size: 0.8rem; }
+}
+
+@media print {
+  .print-slip-compact { font-size: 10pt !important; }
+  .print-slip-compact table { font-size: 9pt !important; }
+  .print-slip-compact .invoice-totals .font-bold { font-size: 11pt !important; }
+  .print-slip-compact .text-right,
+  .print-slip-compact .tabular-nums,
+  .print-slip-compact .amount { font-size: 10pt !important; }
+}
+
+  /* keep container spacing tight so scaled controls don't look spaced out */
+  .ios .form-compact.form-compact--ios-scale .input-group,
+  .ios .form-compact.form-compact--ios-scale .form-group {
+    margin-bottom: 8px !important;
+  }
+
+  /* shrink dropdown arrow visually */
+  .ios .form-compact.form-compact--ios-scale select.input-field {
+    background-size: 1em 1em !important;
+    background-position: right 0.6rem center !important;
+  }
+}
+
+/* Force the tiniest text on mobile (will cause iOS zoom on focus) */
+@media (max-width: 768px) {
+  .form-compact.form-compact--force-tiny input.input-field,
+  .form-compact.form-compact--force-tiny select.input-field,
+  .form-compact.form-compact--force-tiny textarea.input-field,
+  .form-compact.form-compact--force-tiny .input-with-icon input,
+  .form-compact.form-compact--force-tiny input[type="date"].input-field {
+    font-size: 13px !important;
+  }
+
+  .form-compact.form-compact--force-tiny input.input-field::placeholder,
+  .form-compact.form-compact--force-tiny textarea.input-field::placeholder {
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-compact.form-compact--force-tiny input.input-field,
+  .form-compact.form-compact--force-tiny select.input-field,
+  .form-compact.form-compact--force-tiny textarea.input-field,
+  .form-compact.form-compact--force-tiny .input-with-icon input,
+  .form-compact.form-compact--force-tiny input[type="date"].input-field {
+    font-size: 12px !important;
+  }
+
+  .form-compact.form-compact--force-tiny input.input-field::placeholder,
+  .form-compact.form-compact--force-tiny textarea.input-field::placeholder {
+    font-size: 12px !important;
+  }
+}
+/* Enhanced Mobile Experience CSS */
+
+/* Touch feedback animations */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Enhanced button press animation */
+.button-press {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-press::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.button-press:active::before {
+  width: 300px;
+  height: 300px;
+}
+/* Enhanced card hover effects for touch devices */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Better text rendering */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+  /* --- Freelancer Portal: Payment Slip Enhancements --- */
+  /* Base styles for printable content */
+  .printable-content {
+    background: #ffffff;
+    color: #0f172a; /* slate-900 */
+  }
+
+  /* Compact typography rules for the freelancer payment slip */
+  .print-slip-compact {
+    font-size: 0.9rem; /* ~14.4px base */
+  }
+  .print-slip-compact h1 { font-size: 1.5rem; }
+  .print-slip-compact h2 { font-size: 1.1rem; }
+  .print-slip-compact h3 { font-size: 1rem; }
+  .print-slip-compact p,
+  .print-slip-compact span,
+  .print-slip-compact li { font-size: 0.9rem; line-height: 1.35; }
+  .print-slip-compact table { font-size: 0.85rem; }
+  .print-slip-compact th,
+  .print-slip-compact td { padding: 6px 8px; }
+  .print-slip-compact .invoice-totals .font-bold { font-size: 1rem; }
+  .print-slip-compact .text-right,
+  .print-slip-compact .tabular-nums,
+  .print-slip-compact .amount { font-size: 0.95rem; }
+
+  @media (max-width: 640px) {
+    .print-slip-compact { font-size: 0.85rem; }
+    .print-slip-compact table { font-size: 0.8rem; }
+    .print-slip-compact .invoice-totals .font-bold { font-size: 0.95rem; }
+    .print-slip-compact .text-right,
+    .print-slip-compact .tabular-nums,
+    .print-slip-compact .amount { font-size: 0.9rem; }
+  }
+
+  @media print {
+    .print-slip-compact { font-size: 10pt !important; }
+    .print-slip-compact table { font-size: 9pt !important; }
+    .print-slip-compact .invoice-totals .font-bold { font-size: 11pt !important; }
+    .print-slip-compact .text-right,
+    .print-slip-compact .tabular-nums,
+    .print-slip-compact .amount { font-size: 10pt !important; }
+  }
+
+/* Prevent awkward page breaks in key blocks */
+.avoid-break {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Print-specific adjustments */
+@media print {
+  /* Hide UI elements not intended for print */
+  .non-printable { display: none !important; }
+
+  /* Ensure clean page background and remove shadows */
+  html, body { background: #ffffff !important; }
+
+  .printable-content .shadow,
+  .printable-content .shadow-md,
+  .printable-content .shadow-lg,
+  .printable-content .shadow-xl,
+  .printable-content .shadow-2xl { box-shadow: none !important; }
+
+  .printable-content {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+/* Prevent text selection on UI elements */
+button,
+.button-primary,
+.button-secondary,
+nav,
+.nav-item,
+.stat-card-icon {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide scrollbar while maintaining scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Mobile Tab Pills Enhancement */
+@media (max-width: 768px) {
+  /* Smooth scroll for horizontal tab navigation */
+  .scrollbar-hide {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Enhanced touch feedback for mobile tabs */
+  .mobile-tab-pill {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  /* Smooth transitions for tab content */
+  .tab-content-mobile {
+    animation: fadeInUp 0.3s ease-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Enhanced focus states for accessibility */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Avoid double focus outline for our custom form controls (.input-field).
+   These controls already render their own focus styling (border/ring/box-shadow). */
+.input-field:focus-visible,
+.input-field:focus {
+  outline: none;
+}
+
+/* Touch-friendly spacing */
+@media (max-width: 768px) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .touch-spacing {
+    margin: 8px;
+  }
+
+  /* Better readability on mobile */
+  .mobile-text-enhance {
+    line-height: 1.6;
+    font-size: max(16px, 1rem);
+  }
+}
+
+/* Enhanced Mobile Optimization - Comprehensive mobile styles */
+@media (max-width: 768px) {
+  /* Make text smaller on mobile */
+  body {
+    font-size: 14px !important;
+  }
+
+  /* Smaller headings */
+  h1 { font-size: 1.5rem !important; line-height: 1.2 !important; }
+  h2 { font-size: 1.25rem !important; line-height: 1.3 !important; }
+  h3 { font-size: 1.1rem !important; line-height: 1.4 !important; }
+  h4 { font-size: 1rem !important; line-height: 1.4 !important; }
+  h5, h6 { font-size: 0.9rem !important; line-height: 1.4 !important; }
+
+  /* Smaller text elements */
+  .text-sm { font-size: 0.8rem !important; }
+  .text-xs { font-size: 0.7rem !important; }
+  .text-lg { font-size: 1rem !important; }
+  .text-xl { font-size: 1.1rem !important; }
+  .text-2xl { font-size: 1.2rem !important; }
+  .text-3xl { font-size: 1.3rem !important; }
+
+  /* Smaller icons */
+  .w-4 { width: 14px !important; height: 14px !important; }
+  .h-4 { width: 14px !important; height: 14px !important; }
+  .w-5 { width: 16px !important; height: 16px !important; }
+  .h-5 { width: 16px !important; height: 16px !important; }
+  .w-6 { width: 18px !important; height: 18px !important; }
+  .h-6 { width: 18px !important; height: 18px !important; }
+  .w-8 { width: 20px !important; height: 20px !important; }
+  .h-8 { width: 20px !important; height: 20px !important; }
+
+  /* Smaller numbers and stats */
+  .stat-card-value {
+    font-size: 1.5rem !important;
+    line-height: 1.25 !important; /* Relaxed for lists */
+  }
+
+  .stat-card-title {
+    font-size: 0.8rem !important;
+  }
+
+  /* Make modals wider on mobile */
+  .app-modal-dialog {
+    max-width: 95vw !important;
+    width: 95vw !important;
+    margin: 0 2.5vw !important;
+  }
+
+  .chat-modal-dialog {
+    max-width: 95vw !important;
+    width: 95vw !important;
+    margin: 0 2.5vw !important;
+  }
+
+  /* Smaller buttons on mobile */
+  .button-primary,
+  .button-secondary {
+    font-size: 0.8rem !important;
+    padding: 8px 12px !important;
+    min-height: 36px !important;
+    border-radius: 8px !important;
+  }
+
+  .button-primary svg,
+  .button-secondary svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  /* Smaller input elements */
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 10px 12px !important;
+  }
+
+  /* Smaller table text */
+  table th, table td {
+    font-size: 0.8rem !important;
+    padding: 8px 6px !important;
+  }
+
+  /* Smaller navigation */
+  .bottom-nav {
+    padding: 8px 12px !important;
+    min-height: 56px !important;
+  }
+
+  .bottom-nav svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .bottom-nav span {
+    font-size: 0.75rem !important;
+  }
+
+  /* Tighter spacing on mobile */
+  .p-4 { padding: 12px !important; }
+  .p-6 { padding: 16px !important; }
+  .p-8 { padding: 20px !important; }
+
+  .m-4 { margin: 12px !important; }
+  .m-6 { margin: 16px !important; }
+
+  .space-y-4 > * + * { margin-top: 12px !important; }
+  .space-y-6 > * + * { margin-top: 16px !important; }
+
+  /* Smaller cards */
+  .stat-card {
+    padding: 16px !important;
+    min-height: 80px !important;
+  }
+
+  .stat-card-icon {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  /* Projects kanban - smooth horizontal scroll on mobile */
+  .projects-kanban-scroll {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Form selects - ensure touch-friendly size for status dropdown */
+  .form-compact select,
+  .modal-content-area select {
+    min-height: 48px !important;
+  }
+
+  /* Compact modal content */
+  .modal-content-area {
+    padding: 16px !important;
+  }
+
+  .modal-content-area h1,
+  .modal-content-area h2,
+  .modal-content-area h3 {
+    margin-bottom: 12px !important;
+  }
+
+  /* Smaller form elements */
+  .input-field {
+    font-size: 16px !important;
+    padding: 10px 12px !important;
+    min-height: 40px !important;
+  }
+
+  .input-label {
+    font-size: 0.8rem !important;
+  }
+
+  /* Compact grid spacing */
+  .grid-cols-1 {
+    gap: 12px !important;
+  }
+
+  .grid-cols-2 {
+    gap: 12px !important;
+  }
+
+  .grid-cols-3 {
+    gap: 12px !important;
+  }
+
+  /* Smaller page headers */
+  .page-header h1 {
+    font-size: 1.5rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .page-header p {
+    font-size: 0.9rem !important;
+  }
+
+  /* Fix mobile filter overflow issues */
+  .mobile-filter-section {
+    /* Stack items vertically on mobile */
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+  }
+
+  .mobile-filter-section > div {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .mobile-filter-section input,
+  .mobile-filter-section select {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 16px !important;
+    padding: 10px 12px !important;
+  }
+
+  /* Fix date input overflow on mobile */
+  input[type="date"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Fix filter button container */
+  .filter-buttons-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  .filter-buttons-container > * {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Fix search and filter row overflow */
+  .search-filter-row {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+
+  .search-filter-row > * {
+    min-width: calc(50% - 6px) !important;
+    flex: 1 1 auto !important;
+  }
+
+  /* Fix button groups that overflow */
+  .button-group-overflow {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+  }
+
+  .button-group-overflow > * {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  /* Fix tab navigation overflow */
+  .tab-navigation {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .tab-navigation > * {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+
+  /* Fix action buttons that overflow */
+  .action-buttons-row {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+  }
+
+  .action-buttons-row > * {
+    flex: 0 1 auto !important;
+    min-width: calc(33.333% - 6px) !important;
+  }
+
+  /* Fix client table actions overflow */
+  .client-actions-cell {
+    min-width: 120px !important;
+  }
+
+  .client-actions-cell .flex {
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    justify-content: center !important;
+  }
+
+  .client-actions-cell button {
+    flex: 0 1 auto !important;
+    min-width: 32px !important;
+    padding: 6px !important;
+  }
+
+  /* Fix project summary cards overflow */
+  .project-summary-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .project-summary-card > div:first-child {
+    width: 100% !important;
+  }
+
+  .project-summary-card .button-group {
+    width: 100% !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* Fix payment input section overflow */
+  .payment-input-section {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+  }
+
+  .payment-input-section > * {
+    width: 100% !important;
+  }
+
+  .payment-input-section button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Fix stats modal buttons overflow */
+  .stats-modal-actions {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    justify-content: center !important;
+  }
+
+  .stats-modal-actions > * {
+    flex: 0 1 auto !important;
+    min-width: calc(50% - 6px) !important;
+  }
+
+  /* Fix client form grid overflow */
+  .client-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .client-form-grid .input-group {
+    width: 100% !important;
+  }
+
+  /* Fix modal header buttons overflow */
+  .modal-header-buttons {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+  }
+
+  .modal-header-buttons > * {
+    flex: 0 1 auto !important;
+    min-width: calc(50% - 4px) !important;
+  }
+
+  /* Fix leads filter section overflow */
+  .leads-filter-section {
+    /* Stack items vertically on mobile */
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+  }
+
+  .leads-filter-section > div {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .leads-filter-section input,
+  .leads-filter-section select {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 16px !important;
+    padding: 10px 12px !important;
+  }
+
+  /* Fix leads filter button container */
+  .leads-filter-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  .leads-filter-buttons > * {
+    flex: 0 1 auto !important;
+    min-width: calc(25% - 6px) !important;
+    max-width: calc(50% - 4px) !important;
+  }
+
+  /* Fix leads filter row with date inputs */
+  .leads-filter-row {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    align-items: center !important;
+  }
+
+  .leads-filter-row > * {
+    min-width: calc(50% - 4px) !important;
+    flex: 1 1 auto !important;
+  }
+
+  /* Fix source filter dropdown */
+  .leads-source-filter {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Fix leads action buttons */
+  .leads-action-buttons {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    justify-content: center !important;
+  }
+
+  .leads-action-buttons > * {
+    flex: 0 1 auto !important;
+    min-width: 40px !important;
+    padding: 8px !important;
+  }
+
+  /* Fix leads column containers */
+  .leads-column-container {
+    width: calc(100vw - 2rem) !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Fix leads column header */
+  .leads-column-header {
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: flex-start !important;
+    padding: 12px !important;
+  }
+
+  .leads-column-header > * {
+    width: 100% !important;
+  }
+
+  /* Fix leads card layout */
+  .leads-card {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .leads-card-header {
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: flex-start !important;
+  }
+
+  .leads-card-actions {
+    width: 100% !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Fix dashboard main layout */
+  .dashboard-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .dashboard-stats-grid > * {
+    width: 100% !important;
+  }
+
+  /* Fix dashboard widget containers */
+  .dashboard-widget-container {
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  /* Fix dashboard cards grid */
+  .dashboard-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .dashboard-cards-grid > * {
+    width: 100% !important;
+  }
+
+  /* Fix quick links widget */
+  .quick-links-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .quick-links-grid > * {
+    min-width: calc(50% - 6px) !important;
+    width: 100% !important;
+  }
+
+  /* Fix income chart widget */
+  .income-chart-container {
+    height: 300px !important;
+    width: 100% !important;
+  }
+
+  .income-chart-bars {
+    flex-direction: column !important;
+    height: 100% !important;
+    gap: 4px !important;
+  }
+
+  .income-chart-bars > * {
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  /* Fix card widget layout */
+  .card-widget-container {
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 160px !important;
+  }
+
+  .card-widget-container > * {
+    width: 100% !important;
+  }
+
+  /* Fix cards display in MyCardsWidget */
+  .cards-display-grid {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .cards-display-grid > * {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Fix calendar widget */
+  .calendar-widget-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .calendar-widget-items {
+    min-width: 600px !important;
+  }
+
+  .calendar-item {
+    flex: 0 0 auto !important;
+    min-width: 250px !important;
+  }
+
+  /* Fix project status widget */
+  .project-status-container {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  /* Fix leads summary widget */
+  .leads-summary-stats {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .leads-summary-stats > * {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Fix client satisfaction widget */
+  .client-satisfaction-layout {
+    flex-direction: column !important;
+    gap: 16px !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .client-satisfaction-rating {
+    justify-content: center !important;
+  }
+
+  /* Fix asset summary widget */
+  .asset-summary-layout {
+    flex-direction: column !important;
+    gap: 16px !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  /* Fix recent transactions widget */
+  .recent-transactions-list {
+    gap: 12px !important;
+  }
+
+  .recent-transactions-list > * {
+    padding: 12px !important;
+  }
+
+  /* Fix modal content overflow */
+  .dashboard-modal-content {
+    max-height: calc(100vh - 120px) !important;
+    overflow-y: auto !important;
+  }
+
+  /* Fix stat cards layout */
+  .stat-card-mobile {
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  /* Fix invoice layout for mobile */
+  .print-invoice {
+    padding: 16px !important;
+  }
+
+  .print-invoice header {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .print-invoice header > div:last-child {
+    text-align: left !important;
+  }
+
+  .print-invoice .doc-header-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .print-invoice .doc-header-grid > div {
+    padding: 16px !important;
+  }
+
+  .print-invoice table {
+    font-size: 12px !important;
+  }
+
+  .print-invoice th,
+  .print-invoice td {
+    padding: 8px 4px !important;
+  }
+
+  .print-invoice .totals-section {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .print-invoice .totals-section > div:first-child {
+    width: 100% !important;
+  }
+
+  .print-invoice .totals-section > div:last-child {
+    width: 100% !important;
+  }
+
+  .print-invoice .doc-footer-flex {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .print-invoice .doc-footer-flex > div {
+    width: 100% !important;
+  }
+
+  .print-invoice footer {
+    margin-top: 24px !important;
+    padding-top: 16px !important;
+  }
+
+  .print-invoice footer > div {
+    margin-top: 12px !important;
+  }
+
+  /* Extra-compact invoice typography for small phones */
+  @media (max-width: 480px) {
+    .print-invoice {
+      padding: 12px !important;
+      font-size: 12px !important; /* Base smaller text inside invoice */
+    }
+
+    .print-invoice header h1 {
+      font-size: 1rem !important; /* Smaller Invoice title */
+      line-height: 1.2 !important;
+    }
+
+    /* Make address/phone/email lines smaller */
+    .print-invoice header p,
+    .print-invoice header span,
+    .print-invoice .doc-header-grid p,
+    .print-invoice .doc-header-grid span,
+    .print-invoice .contact-line,
+    .print-invoice .address-line {
+      font-size: 0.75rem !important;
+      line-height: 1.3 !important;
+    }
+
+    /* Smaller numbers and monetary amounts */
+    .print-invoice .tabular-nums,
+    .print-invoice .amount,
+    .print-invoice .text-right {
+      font-size: 11px !important;
+    }
+
+    /* Tighter table text on very small screens */
+    .print-invoice table {
+      font-size: 11px !important;
+    }
+
+    .print-invoice th,
+    .print-invoice td {
+      padding: 6px 4px !important;
+    }
+
+    /* Totals section: reduce emphasis size */
+    .print-invoice .totals-section .font-bold {
+      font-size: 0.9rem !important;
+    }
+
+    .print-invoice .totals-section .text-sm {
+      font-size: 0.75rem !important;
+    }
+
+    /* Generic printable area fallback (for invoices without .print-invoice class) */
+    .printable-area {
+      font-size: 12px !important;
+      padding: 12px !important;
+    }
+
+    .printable-area h1 { font-size: 1rem !important; line-height: 1.2 !important; }
+    .printable-area h2 { font-size: 0.95rem !important; line-height: 1.25 !important; }
+    .printable-area h3 { font-size: 0.9rem !important; line-height: 1.3 !important; }
+    .printable-area h4, 
+    .printable-area h5, 
+    .printable-area h6 { font-size: 0.85rem !important; line-height: 1.3 !important; }
+
+    .printable-area p,
+    .printable-area span,
+    .printable-area li {
+      font-size: 0.8rem !important;
+      line-height: 1.35 !important;
+    }
+
+    .printable-area table { font-size: 11px !important; }
+    .printable-area th, .printable-area td { padding: 6px 4px !important; }
+
+    /* Contact/address lines commonly used in headers */
+    .printable-area .contact-line,
+    .printable-area .address-line,
+    .printable-area .meta-line {
+      font-size: 0.75rem !important;
+    }
+
+    /* Amounts and right-aligned numbers */
+    .printable-area .tabular-nums,
+    .printable-area .amount,
+    .printable-area .text-right {
+      font-size: 11px !important;
+    }
+  }
+
+  /* Fix receipt layout for mobile */
+  .print-receipt {
+    padding: 16px !important;
+  }
+
+  .print-receipt header h1 {
+    font-size: 18pt !important;
+  }
+
+  .print-receipt .printable-bg-green-light {
+    padding: 16px !important;
+  }
+
+  .print-receipt .printable-bg-green-light p {
+    font-size: 12pt !important;
+  }
+
+  .print-receipt .printable-bg-green-light p:first-child {
+    font-size: 14pt !important;
+  }
+
+  .print-receipt footer {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 16px !important;
+  }
+
+  .print-receipt footer > div:last-child {
+    width: 100% !important;
+  }
+
+  /* Fix signature section for mobile */
+  .signature-section {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 16px !important;
+  }
+
+  .signature-section > div {
+    width: 100% !important;
+  }
+
+  /* Fix invoice table styling */
+  .invoice-table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    margin: 16px 0 !important;
+  }
+
+  .invoice-table-header th {
+    background-color: #f8fafc !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+  }
+
+  .invoice-table-body tr {
+    transition: background-color 0.2s ease !important;
+  }
+
+  .invoice-table-body tr:hover {
+    background-color: #f8fafc !important;
+  }
+
+  .invoice-table-body td {
+    vertical-align: top !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  .invoice-item-description {
+    max-width: 300px !important;
+  }
+
+  .invoice-item-description p {
+    margin: 0 !important;
+    line-height: 1.4 !important;
+  }
+
+  .invoice-item-description .text-xs {
+    color: #64748b !important;
+    font-style: italic !important;
+  }
+
+  /* Tabular numbers for better alignment */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums !important;
+    font-feature-settings: 'tnum' !important;
+  }
+
+  /* Mobile responsive invoice table - simple layout, no overlapping */
+  @media (max-width: 768px) {
+    .invoice-table {
+      font-size: 12px !important;
+    }
+
+    .invoice-table th,
+    .invoice-table td {
+      padding: 6px 4px !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+    }
+
+    .invoice-table th {
+      background-color: #f8fafc !important;
+      font-weight: 600 !important;
+    }
+
+    .invoice-item-description {
+      max-width: 100% !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+
+    .invoice-item-description p {
+      font-size: 12px !important;
+      line-height: 1.3 !important;
+    }
+
+    .invoice-item-description .text-xs {
+      font-size: 10px !important;
+      line-height: 1.2 !important;
+    }
+  }
+
+  /* Print styles for invoice table */
+  @media print {
+    .invoice-table {
+      page-break-inside: avoid !important;
+    }
+
+    .invoice-table th,
+    .invoice-table td {
+      padding: 6px 4px !important;
+      font-size: 10pt !important;
+    }
+
+    .invoice-table-body tr:hover {
+      background-color: transparent !important;
+    }
+
+    .invoice-item-description {
+      max-width: none !important;
+    }
+  }
+
+  /* Fix responsive table headers */
+  .invoice-table th,
+  .invoice-table td {
+    position: relative !important;
+  }
+
+  .invoice-table th[data-label]:before,
+  .invoice-table td[data-label]:before {
+    content: attr(data-label) !important;
+    position: absolute !important;
+    left: 12px !important;
+    top: 12px !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    background-color: #f8fafc !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    z-index: 10 !important;
+  }
+
+  @media (max-width: 640px) {
+    .invoice-table th:not(:first-child),
+    .invoice-table td:not(:first-child) {
+      text-align: right !important;
+    }
+
+    .invoice-table th:first-child:before,
+    .invoice-table td:first-child:before {
+      display: none !important;
+    }
+  }
+
+  .invoice-item-description .text-right {
+    text-align: right !important;
+  }
+
+  /* Fix invoice totals section */
+  .invoice-totals {
+    background-color: #f8fafc !important;
+    padding: 16px !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .invoice-totals .flex {
+    align-items: center !important;
+  }
+
+  .invoice-totals .font-bold {
+    color: #1e293b !important;
+  }
+
+  .invoice-signature-section {
+    background-color: #ffffff !important;
+    padding: 16px !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .invoice-signature-section h4 {
+    color: #475569 !important;
+    font-size: 14px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Mobile responsive invoice totals */
+  @media (max-width: 768px) {
+    .invoice-totals {
+      padding: 12px !important;
+      margin-bottom: 16px !important;
+    }
+
+    .invoice-totals .text-sm {
+      font-size: 12px !important;
+    }
+
+    .invoice-totals .font-bold {
+      font-size: 14px !important;
+    }
+
+    .invoice-signature-section {
+      padding: 12px !important;
+    }
+
+    .invoice-signature-section h4 {
+      font-size: 12px !important;
+    }
+  }
+
+  /* Print styles for invoice totals */
+  @media print {
+    .invoice-totals {
+      background-color: transparent !important;
+      border: 1px solid #334155 !important;
+      padding: 12px !important;
+    }
+
+    .invoice-signature-section {
+      background-color: transparent !important;
+      border: 1px solid #334155 !important;
+      box-shadow: none !important;
+    }
+  }
+
+  /* Ensure proper text alignment in invoice */
+  .text-left {
+    text-align: left !important;
+  }
+
+  .text-center {
+    text-align: center !important;
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+
+  /* Fix column headers for better alignment */
+  .invoice-table th:first-child {
+    width: 40% !important;
+  }
+
+  .invoice-table th:nth-child(2) {
+    width: 15% !important;
+  }
+
+  .invoice-table th:nth-child(3),
+  .invoice-table th:nth-child(4) {
+    width: 22.5% !important;
+  }
+
+  /* Tabular numbers for better alignment */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums !important;
+    font-feature-settings: 'tnum' !important;
+  }
+
+  /* Invoice item description styling */
+  .invoice-item-description {
+    max-width: 300px !important;
+    word-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+
+  .invoice-item-description p {
+    margin: 0 !important;
+    line-height: 1.4 !important;
+  }
+
+  .invoice-item-description .text-xs {
+    color: #64748b !important;
+    font-style: italic !important;
+  }
+
+}
+
+/* Button styles for primary actions - Enhanced with better hover states and accessibility */
+@media (max-width: 480px) {
+  body {
+    font-size: 13px !important;
+  }
+
+  /* Even smaller text */
+  h1 { font-size: 1.3rem !important; }
+  h2 { font-size: 1.15rem !important; }
+  h3 { font-size: 1rem !important; }
+
+  .text-sm { font-size: 0.75rem !important; }
+  .text-xs { font-size: 0.65rem !important; }
+
+  /* Smaller icons */
+  .w-4 { width: 12px !important; height: 12px !important; }
+  .h-4 { width: 12px !important; height: 12px !important; }
+  .w-5 { width: 14px !important; height: 14px !important; }
+  .h-5 { width: 14px !important; height: 14px !important; }
+  .w-6 { width: 16px !important; height: 16px !important; }
+  .h-6 { width: 16px !important; height: 16px !important; }
+
+  /* Make modals almost full width */
+  .app-modal-dialog,
+  .chat-modal-dialog {
+    max-width: 98vw !important;
+    width: 98vw !important;
+    margin: 0 1vw !important;
+  }
+
+  /* Even smaller buttons */
+  .button-primary,
+  .button-secondary {
+    font-size: 0.75rem !important;
+    padding: 6px 10px !important;
+    min-height: 32px !important;
+  }
+
+  .button-primary svg,
+  .button-secondary svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Compact navigation */
+  .bottom-nav {
+    padding: 6px 8px !important;
+    min-height: 52px !important;
+  }
+
+  .bottom-nav svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Very compact spacing */
+  .p-4 { padding: 8px !important; }
+  .p-6 { padding: 12px !important; }
+  .p-8 { padding: 16px !important; }
+}
+
+/* Loading skeleton animation */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+/* Enhanced accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .button-primary {
+    border: 2px solid currentColor;
+  }
+
+  .card-hover {
+    border: 1px solid currentColor;
+  }
+}
+
+/* Top-level mobile overrides for invoice so they are not nested and will apply */
+@media (max-width: 768px) {
+  /* Invoice container spacing */
+  .print-invoice { padding: 16px !important; }
+  .print-invoice header { flex-direction: column !important; gap: 16px !important; }
+  .print-invoice header > div:last-child { text-align: left !important; }
+  .print-invoice .doc-header-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .print-invoice .doc-header-grid > div { padding: 16px !important; }
+  .print-invoice table { font-size: 12px !important; }
+  .print-invoice th, .print-invoice td { padding: 8px 4px !important; }
+  .print-invoice .totals-section { flex-direction: column !important; gap: 16px !important; }
+  .print-invoice .doc-footer-flex { flex-direction: column !important; gap: 16px !important; }
+}
+
+@media (max-width: 480px) {
+  /* Extra-compact invoice and generic printable area on small phones */
+  .print-invoice, .printable-area { padding: 8px !important; font-size: 12px !important; }
+  .print-invoice header h1, .printable-area h1 { font-size: 1rem !important; line-height: 1.2 !important; }
+  .printable-area h2 { font-size: 0.95rem !important; line-height: 1.25 !important; }
+  .printable-area h3 { font-size: 0.9rem !important; line-height: 1.3 !important; }
+  .printable-area h4, .printable-area h5, .printable-area h6 { font-size: 0.85rem !important; line-height: 1.3 !important; }
+  .print-invoice header p,
+  .print-invoice header span,
+  .print-invoice .doc-header-grid p,
+  .print-invoice .doc-header-grid span,
+  .print-invoice .contact-line,
+  .print-invoice .address-line,
+  .printable-area p,
+  .printable-area span,
+  .printable-area li { font-size: 0.8rem !important; line-height: 1.35 !important; }
+  .print-invoice table, .printable-area table { font-size: 11px !important; }
+  .print-invoice th, .print-invoice td, .printable-area th, .printable-area td { padding: 6px 4px !important; }
+  .print-invoice .tabular-nums,
+  .print-invoice .amount,
+  .print-invoice .text-right,
+  .printable-area .tabular-nums,
+  .printable-area .amount,
+  .printable-area .text-right { font-size: 11px !important; }
+
+  /* Client Portal specific tightening */
+  .template-wrapper .print-invoice header h2 { /* "Invoice" title */
+    font-size: 0.85rem !important;
+    line-height: 1.2 !important;
+  }
+  .template-wrapper .print-invoice p,
+  .template-wrapper .print-invoice span,
+  .template-wrapper .print-invoice li {
+    font-size: 0.7rem !important;
+    line-height: 1.3 !important;
+  }
+  .template-wrapper .print-invoice .font-extrabold { /* big amount in blue box */
+    font-size: 0.9rem !important;
+    line-height: 1.2 !important;
+  }
+  .template-wrapper .print-invoice .font-bold {
+    font-size: 0.85rem !important;
+  }
+  .template-wrapper .print-invoice .invoice-table {
+    font-size: 9px !important;
+  }
+  .template-wrapper .print-invoice .tabular-nums,
+  .template-wrapper .print-invoice .amount,
+  .template-wrapper .print-invoice .text-right {
+    font-size: 10px !important;
+  }
+}
+
+/* Ultra-compact for very small phones */
+@media (max-width: 380px) {
+  .template-wrapper .print-invoice header h2 {
+    font-size: 0.8rem !important;
+  }
+  .template-wrapper .print-invoice p,
+  .template-wrapper .print-invoice span,
+  .template-wrapper .print-invoice li {
+    font-size: 0.6rem !important;
+    line-height: 1.25 !important;
+  }
+  .template-wrapper .print-invoice header p,
+  .template-wrapper .print-invoice header span {
+    font-size: 0.6rem !important;
+    line-height: 1.25 !important;
+  }
+  .template-wrapper .print-invoice .font-extrabold {
+    font-size: 0.85rem !important;
+  }
+  .template-wrapper .print-invoice .font-bold {
+    font-size: 0.8rem !important;
+  }
+  .template-wrapper .print-invoice .invoice-table {
+    font-size: 8px !important;
+  }
+  .template-wrapper .print-invoice th,
+  .template-wrapper .print-invoice td {
+    padding: 4px 3px !important;
+  }
+  /* extra-compact container padding on very small phones */
+  .print-invoice, .printable-area { padding: 6px !important; }
+}
+
+/* Enhanced print styles for modal-based documents (Invoice/Receipt/Contract) */
+/* A4 with Indonesian standard margins: 2.5cm left/right, 2cm top/bottom */
+@page {
+  size: A4 portrait;
+  margin: 2cm 2.5cm;
+}
+
+@media print {
+
+  /* Ensure colors render as seen on screen */
+  html,
+  body,
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Force neutral canvas with proper typography */
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    /* Match on-screen font */
+    font-family: 'Manrope', sans-serif !important;
+  }
+
+  body {
+    margin: 0 !important;
+    font-size: 12pt !important;
+    line-height: 1.2 !important;
+    /* Indonesian standard line spacing - optimized for readability */
+  }
+
+  /* Hide all non-document UI thoroughly */
+  .bottom-nav,
+  .mobile-header,
+  .sidebar,
+  .app-sidebar,
+  .app-header,
+  .template-wrapper>aside,
+  .non-printable,
+  .button-primary,
+  .button-secondary,
+  button,
+  nav,
+  header[role="banner"],
+  footer[role="contentinfo"],
+  [data-non-print],
+  [aria-live] {
+    display: none !important;
+  }
+
+  /* Disable animations/transforms and position quirks that break print */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  [style*="transform"],
+  .animate-scale-in {
+    transform: none !important;
+  }
+
+  [style*="position: fixed"],
+  .fixed,
+  [style*="position: sticky"],
+  .sticky {
+    position: static !important;
+  }
+
+  .shadow,
+  [class*="shadow"],
+  .ring,
+  [class*="ring-"] {
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  /* Print: hide common app chrome, keep document areas visible by layout (no global visibility hacks) */
+  /* We avoid body * {visibility:hidden} because hidden ancestors keep children hidden in print */
+
+  /* Print-Specific CSS model: hide everything, then show only `.printable-area` */
+  /* This is safe with `visibility` because children can override parent visibility */
+  body * {
+    visibility: hidden !important;
+  }
+
+  .printable-area,
+  .printable-area * {
+    visibility: visible !important;
+  }
+
+  /* ==========================================================================
+     ENHANCED DOCUMENT STYLING - INVOICE, RECEIPT, CONTRACT, BUKTI PEMBAYARAN
+     ========================================================================== */
+  
+  /* ===== INVOICE STYLING - DINAMIS TANPA BACKGROUND ===== */
+  .print-invoice {
+    font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !important;
+    background: transparent !important; /* No background */
+    color: #1e293b !important;
+    line-height: 1.5 !important;
+    font-size: 12pt !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .print-invoice .max-w-4xl {
+    max-width: none !important; /* Dynamic width */
+    margin: 0 !important; /* No centering margins */
+    background: transparent !important; /* No background */
+    padding: 12pt 0 !important; /* Better padding */
+    box-shadow: none !important; /* No shadow */
+    min-width: 220pt !important; /* Better width */
+  }
+  
+  /* Invoice Header - Dynamic spacing */
+  .print-invoice header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    margin-bottom: 12pt !important; /* Better spacing */
+    border-bottom: none !important;
+    padding: 0 !important;
+  }
+  
+  /* Logo - Lebih kecil sesuai gambar */
+  .print-invoice header img {
+    height: 70pt !important; /* Taller for better proportion */
+    max-width: 60pt !important;
+    height: auto !important;
+    width: auto !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+    margin-bottom: 2pt !important;
+  }
+  
+  .print-invoice header h1 {
+    font-size: 14pt !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin: 0 0 4pt 0 !important;
+    line-height: 1.2 !important;
+  }
+  
+  .print-invoice header > div:first-child p {
+    font-size: 9pt !important;
+    color: #64748b !important;
+    margin: 0 0 1pt 0 !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Invoice Title and Info - Right side */
+  .print-invoice header > div:last-child {
+    text-align: right !important;
+    margin-top: 0 !important;
+  }
+  
+  .print-invoice header h2 {
+    font-size: 18pt !important; /* Larger title */
+    font-weight: 600 !important; /* Medium weight */
+    color: #cbd5e1 !important; /* Very light gray */
+    text-transform: uppercase !important;
+    letter-spacing: 0.2em !important;
+    margin: 0 0 6pt 0 !important;
+    line-height: 1 !important;
+  }
+  
+  .print-invoice header > div:last-child p {
+    font-size: 9pt !important;
+    color: #64748b !important;
+    margin: 0 0 2pt 0 !important;
+    line-height: 1.3 !important;
+  }
+  
+  .print-invoice header > div:last-child p span {
+    font-weight: 600 !important;
+    color: #1e293b !important;
+  }
+  
+  /* Invoice Info Sections - Dynamic layout dengan proper alignment */
+  .print-invoice .doc-header-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24pt !important; /* Increased gap for better separation */
+    margin: 0 0 16pt 0 !important;
+    align-items: start !important; /* Align tops */
+  }
+  
+  .print-invoice .doc-header-grid > div {
+    background: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    max-height: 55pt !important; /* Larger images / consistent height */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  
+  .print-invoice .doc-header-grid h3 {
+    font-size: 8pt !important;
+    font-weight: 600 !important;
+    color: #94a3b8 !important;
+    text-transform: uppercase !important;
+    margin: 0 0 8pt 0 !important;
+    border: none !important;
+    padding: 0 !important;
+    letter-spacing: 0.1em !important;
+  }
+  
+  .print-invoice .doc-header-grid p {
+    font-size: 10pt !important;
+    color: #475569 !important; /* Muted color for position */
+    margin: 0 0 2pt 0 !important;
+    line-height: 1.4 !important;
+    word-wrap: break-word !important;
+  }
+  
+  .print-invoice .doc-header-grid .font-bold {
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    margin-bottom: 4pt !important;
+  }
+  
+  /* Outstanding Balance Section - Dynamic spacing */
+  .print-invoice section.mb-12 {
+    margin-bottom: 16pt !important; /* Reduced margin for dynamic layout */
+  }
+  
+  .print-invoice .printable-bg-blue {
+    background: #3b82f6 !important;
+    color: #ffffff !important;
+    padding: 6pt 10pt !important; /* Better padding */
+    border-radius: 6pt !important; /* Smaller radius for dynamic look */
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1) !important; /* Lighter shadow */
+  }
+  
+  .print-invoice .printable-bg-blue h3 {
+    font-size: 9pt !important;
+    font-weight: 600 !important;
+    color: #dbeafe !important; /* Lighter blue text */
+    text-transform: uppercase !important;
+    margin: 10pt 0 12pt 0 !important; /* Better spacing */
+  }
+  
+  .print-invoice .printable-bg-blue .font-extrabold {
+    font-size: 16pt !important; /* Larger subtitle */
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin: 24pt 0 8pt 0 !important; /* Better spacing */
+    word-wrap: break-word !important;
+    line-height: 1.1 !important;
+  }
+  
+  .print-invoice .printable-bg-blue p:last-child {
+    font-size: 10pt !important;
+    color: #dbeafe !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Invoice Table Styling - Dynamic layout */
+  .print-invoice .invoice-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    text-align: left !important;
+    margin: 12pt 0 !important; /* Better spacing */
+    border: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+  }
+  
+  .print-invoice .invoice-table-header tr {
+    border-bottom: 1pt solid #e2e8f0 !important;
+  }
+  
+  .print-invoice .invoice-table-header th {
+    padding: 8pt 6pt !important;
+    font-size: 8pt !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    color: #94a3b8 !important; /* Light gray headers */
+    background: none !important;
+    border: none !important;
+    border-bottom: 1pt solid #e2e8f0 !important;
+    letter-spacing: 0.05em !important;
+  }
+  
+  .print-invoice .invoice-table-header th:first-child {
+    text-align: left !important;
+    padding-left: 0 !important;
+  }
+  
+  .print-invoice .invoice-table-header th:nth-child(2) {
+    text-align: center !important;
+    min-width: 30pt !important;
+  }
+  
+  .print-invoice .invoice-table-header th:nth-child(3),
+  .print-invoice .invoice-table-header th:nth-child(4) {
+    text-align: right !important;
+    min-width: 60pt !important;
+  }
+  
+  .print-invoice .invoice-table-body tr {
+    border-bottom: none !important; /* Clean rows */
+  }
+  
+  .print-invoice .invoice-table-body tr:hover {
+    background: none !important; /* No hover in print */
+  }
+  
+  .print-invoice .invoice-table-body td {
+    padding: 8pt 6pt !important;
+    vertical-align: top !important;
+    border: none !important;
+    font-size: 10pt !important;
+    color: #1e293b !important;
+  }
+  
+  .print-invoice .invoice-table-body td:first-child {
+    padding-left: 0 !important;
+  }
+  
+  .print-invoice .invoice-table-body td:nth-child(2) {
+    text-align: center !important;
+  }
+  
+  .print-invoice .invoice-table-body td:nth-child(3),
+  .print-invoice .invoice-table-body td:nth-child(4) {
+    text-align: right !important;
+  }
+  
+  .print-invoice .invoice-item-description .font-semibold {
+    font-weight: 600 !important;
+    color: #0f172a !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+  }
+  
+  .print-invoice .invoice-item-description .text-xs {
+    font-size: 9pt !important;
+    color: #64748b !important;
+    margin-top: 2pt !important;
+    line-height: 1.3 !important;
+  }
+  
+  .print-invoice .invoice-table-body .font-semibold {
+    font-weight: 600 !important;
+    color: #1e293b !important;
+  }
+  
+  .print-invoice .invoice-table-body .font-bold {
+    font-weight: 700 !important;
+    color: #0f172a !important;
+  }
+  
+  .print-invoice .invoice-table-body .text-slate-600 {
+    color: #64748b !important;
+  }
+  
+  .print-invoice .tabular-nums {
+    font-variant-numeric: tabular-nums !important;
+    font-feature-settings: 'tnum' !important;
+  }
+  
+  /* Invoice Totals & Signature Section - Proper alignment */
+  .print-invoice .totals-section {
+    margin-top: 20pt !important;
+    page-break-inside: avoid !important;
+  }
+  
+  .print-invoice .doc-footer-flex {
+    display: grid !important; /* Changed to grid for better alignment */
+    grid-template-columns: 1fr 1fr !important; /* Equal columns */
+    gap: 32pt !important; /* Sufficient gap */
+    align-items: start !important; /* Align to top */
+  }
+  
+  /* Signature Section - Proper alignment */
+  .print-invoice .invoice-signature-section {
+    width: 100% !important;
+    background: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; /* Left align */
+    line-height: 1.2 !important; /* Consistent body text */
+  }
+  
+  .print-invoice .invoice-signature-section h4 {
+    font-size: 10pt !important;
+    font-weight: 600 !important; /* font-semibold */
+    color: #475569 !important; /* text-slate-600 */
+    margin: 0 0 9pt 0 !important; /* mb-3 */
+    border: none !important;
+    padding: 0 !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+  }
+  
+  .print-invoice .invoice-signature-section img {
+    max-height: 36pt !important; /* Lebih kecil saat cetak - proporsional dengan dokumen */
+    max-width: 100pt !important; /* Batasi lebar agar tidak memenuhi halaman */
+    height: auto !important;
+    width: auto !important;
+    margin-top: 6pt !important; /* mt-2 */
+    object-fit: contain !important;
+  }
+  
+  .print-invoice .invoice-signature-section .text-xs {
+    height: 36pt !important; /* Sama dengan max-height img saat cetak */
+    margin-top: 6pt !important; /* mt-2 */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 11.5pt !important; /* Better base size */
+    color: #94a3b8 !important; /* text-slate-400 */
+    font-style: italic !important;
+    background: none !important;
+    border: 1pt dashed #cbd5e1 !important; /* border border-dashed border-slate-300 */
+    border-radius: 6pt !important; /* rounded-lg */
+    padding: 0 !important;
+  }
+  
+  /* Totals Section - Proper right alignment */
+  .print-invoice .invoice-totals {
+    width: 100% !important; /* Full width of grid cell */
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important; /* Right align all content */
+    line-height: 1.2 !important; /* Consistent body text */
+  }
+  
+  .print-invoice .invoice-totals .flex {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 3pt 0 !important;
+    border: none !important;
+    margin: 0 !important;
+    max-width: 130pt !important; /* Wider images for consistent alignment */
+    min-width: 180pt !important;
+  }
+  
+  .print-invoice .invoice-totals .flex:last-child {
+    padding: 4pt 0 !important;
+    margin-top: 6pt !important;
+    padding-top: 6pt !important;
+    border-top: 1px solid #e2e8f0 !important;
+    border-bottom: none !important;
+    font-weight: normal !important;
+    font-size: 10pt !important;
+  }
+  
+  /* Label (kiri) */
+  .print-invoice .invoice-totals span:first-child {
+    font-weight: 600 !important; /* lebih tebal */
+    color: #0f172a !important;
+    font-size: 10pt !important;
+    text-align: left !important;
+    flex-grow: 1 !important;
+    position: relative !important;
+    padding-right: 8pt !important; /* ruang sebelum ":" */
+  }
+  /* Tambahkan titik dua setelah label */
+  .print-invoice .invoice-totals span:first-child::after {
+    content: " :" !important;
+    color: #94a3b8 !important; /* abu-abu muda untuk pemisah */
+    font-weight: 700 !important;
+    margin-left: 2pt !important;
+  }
+  
+  /* Nilai (kanan) */
+  .print-invoice .invoice-totals span:last-child {
+    font-weight: 700 !important; /* bold */
+    color: #1e293b !important;
+    font-size: 10pt !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+  }
+  
+  /* Baris terakhir (Sisa Tagihan) lebih menonjol */
+  .print-invoice .invoice-totals .flex:last-child span:first-child {
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+  }
+  
+  .print-invoice .invoice-totals .flex:last-child span:last-child {
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+  }
+  
+  .print-invoice .print-text-green {
+    color: #16a34a !important; /* text-green-600 */
+  }
+  
+  /* Invoice Footer - Dynamic terms section */
+  .print-invoice footer {
+    margin-top: 24pt !important; /* Better spacing */
+    padding-top: 0 !important;
+    border-top: none !important;
+    page-break-inside: avoid !important;
+  }
+  
+  .print-invoice footer .mb-8 {
+    padding-bottom: 5pt !important; /* Better padding */
+  }
+  
+  .print-invoice footer h4 {
+    font-weight: 600 !important;
+    color: #0f172a !important;
+    margin-bottom: 6pt !important;
+    font-size: 10pt !important;
+  }
+  
+  .print-invoice footer .text-xs {
+    font-size: 8pt !important;
+    color: #64748b !important;
+    white-space: pre-wrap !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    text-align: justify !important;
+  }
+  
+  .print-invoice footer .text-center {
+    text-align: center !important;
+    font-size: 8pt !important;
+    color: #64748b !important;
+    margin-top: 12pt !important;
+  }
+  
+  /* Remove blue bar in print - cleaner look */
+  .print-invoice footer .bg-blue-600 {
+    display: none !important;
+  }
+  
+  /* ===== RECEIPT/KWITANSI STYLING ===== */
+  .print-receipt {
+    font-family: 'Manrope', 'Inter', sans-serif !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    line-height: 1.2 !important;
+    font-size: 12pt !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Receipt Header */
+  .print-receipt header {
+    text-align: center !important;
+    margin-bottom: 12pt !important;
+    padding-bottom: 8pt !important;
+    border-bottom: 2px solid #059669 !important;
+  }
+  
+  .print-receipt header h1 {
+    font-size: 14pt !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    margin: 0 0 5pt 0 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+  }
+  
+  .print-receipt header p {
+    font-size: 10pt !important;
+    color: #64748b !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+  }
+  
+  /* Receipt Amount Section */
+  .print-receipt .printable-bg-green-light {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0) !important;
+    border: 2px solid #059669 !important;
+    border-radius: 8pt !important;
+    padding: 15pt !important;
+    margin: 15pt 0 !important;
+    text-align: center !important;
+  }
+  
+  .print-receipt .printable-bg-green-light p:first-child {
+    font-size: 10pt !important;
+    font-weight: 700 !important;
+    color: #047857 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 0 3pt 0 !important;
+  }
+  
+  .print-receipt .printable-bg-green-light .font-bold {
+    font-size: 24pt !important;
+    font-weight: 800 !important;
+    color: #065f46 !important;
+    margin: 0 !important;
+    letter-spacing: -0.05em !important;
+    font-family: 'Manrope', monospace !important;
+  }
+  
+  /* Receipt Details */
+  .print-receipt .space-y-3 {
+    margin: 15pt 0 !important;
+  }
+  
+  .print-receipt .space-y-3 .flex {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 4pt 0 !important;
+    border-bottom: 1px dotted #cbd5e1 !important;
+    margin-bottom: 3pt !important;
+  }
+  
+  .print-receipt .space-y-3 .flex:last-child {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .print-receipt .space-y-3 span:first-child {
+    font-size: 10pt !important;
+    color: #64748b !important;
+    font-weight: 600 !important;
+  }
+  
+  .print-receipt .space-y-3 span:last-child {
+    font-size: 10pt !important;
+    color: #0f172a !important;
+    font-weight: 700 !important;
+  }
+  
+  .print-receipt .font-mono {
+    font-family: 'Consolas', 'Monaco', monospace !important;
+    background: #f8fafc !important;
+    padding: 1pt 3pt !important;
+    border-radius: 2pt !important;
+  }
+  
+  /* Receipt Payment Description Section */
+  .print-receipt .border-t {
+    border-top: 2px solid #e2e8f0 !important;
+    margin-top: 12pt !important;
+    padding-top: 10pt !important;
+  }
+  
+  .print-receipt .border-t p:first-child {
+    font-size: 9pt !important;
+    color: #64748b !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 0 3pt 0 !important;
+  }
+  
+  .print-receipt .border-t .font-semibold {
+    font-size: 11pt !important;
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    margin: 0 0 8pt 0 !important;
+    line-height: 1.3 !important;
+  }
+  
+  .print-receipt .text-xs {
+    font-size: 8pt !important;
+    color: #64748b !important;
+    line-height: 1.3 !important;
+  }
+  
+  .print-receipt .text-xs p {
+    margin: 0 0 2pt 0 !important;
+  }
+  
+  /* Receipt Signature Section */
+  .print-receipt .signature-section {
+    margin-top: 20pt !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    page-break-inside: avoid !important;
+    border-top: 1px solid #e2e8f0 !important;
+    padding-top: 12pt !important;
+  }
+  
+  .print-receipt .signature-section p:first-child {
+    font-size: 8pt !important;
+    color: #94a3b8 !important;
+    font-style: italic !important;
+  }
+  
+  .print-receipt .signature-section > div {
+    text-align: center !important;
+    min-width: 120pt !important;
+  }
+  
+  .print-receipt .signature-section img {
+    max-height: 25pt !important;
+    max-width: 100pt !important;
+    object-fit: contain !important;
+    border-bottom: 1px solid #94a3b8 !important;
+    padding-bottom: 2pt !important;
+    margin-bottom: 3pt !important;
+  }
+  
+  .print-receipt .signature-section .border-dashed {
+    height: 25pt !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-bottom: 1px dashed #94a3b8 !important;
+    font-size: 7pt !important;
+    color: #94a3b8 !important;
+    font-style: italic !important;
+    margin-bottom: 3pt !important;
+  }
+  
+  .print-receipt .signature-section p:last-child {
+    font-size: 9pt !important;
+    color: #475569 !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+  }
+
+}  /* Close the first @media print block */
+
+@media print {
+  /* Enhanced document separators */
+  .document-separator {
+    border-top: 2px solid #cbd5e1 !important;
+    margin: 20pt 0 !important;
+    height: 1px !important;
+  }
+
+  .section-separator {
+    border-top: 1px solid #333 !important;
+    margin: 15pt 0 10pt 0 !important;
+    height: 1px !important;
+  }
+
+  /* Enhanced professional document styling */
+  .document-header {
+    border-bottom: 2px solid #333 !important;
+    padding-bottom: 10pt !important;
+    margin-bottom: 20pt !important;
+  }
+
+  .document-title {
+    text-align: center !important;
+    font-size: 16pt !important;
+    font-weight: bold !important;
+    margin: 0 0 5pt 0 !important;
+    text-transform: uppercase !important;
+  }
+
+  .document-subtitle {
+    text-align: center !important;
+    font-size: 14pt !important;
+    font-weight: bold !important;
+    margin: 0 0 15pt 0 !important;
+  }
+
+  /* Enhanced party information styling */
+  .party-section {
+    margin: 12pt 0 !important;
+    padding: 8pt 0 !important;
+  }
+
+  .party-title {
+    font-weight: bold !important;
+    font-size: 12pt !important;
+    margin: 0 0 5pt 0 !important;
+    text-transform: uppercase !important;
+  }
+
+  .party-details {
+    margin-left: 12pt !important;
+    text-align: justify !important;
+  }
+
+  /* Enhanced document-specific print sizing */
+  .print-invoice,
+  .print-invoice * {
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 11pt !important;
+    line-height: 1.15 !important;
+    /* Indonesian standard */
+  }
+
+  .print-receipt,
+  .print-receipt * {
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 11pt !important;
+    line-height: 1.15 !important;
+    /* Indonesian standard */
+  }
+
+  
+
+  .print-invoice p {
+    line-height: 1.15 !important;
+    margin: 0 0 6pt 0 !important;
+    /* 6pt paragraph spacing for invoices */
+  }
+
+  .print-receipt p {
+    line-height: 1.15 !important;
+    margin: 0 0 6pt 0 !important;
+    /* 6pt paragraph spacing for receipts */
+  }
+
+  /* Compact spacing for invoice/receipt to fit one page */
+  .print-invoice h1 {
+    font-size: 14.5pt !important;
+  }
+
+  .print-invoice h2 {
+    font-size: 12.5pt !important;
+  }
+
+  .print-invoice h3 {
+    font-size: 10.5pt !important;
+  }
+
+  .print-invoice .mt-12,
+  .print-invoice .mb-12 {
+    margin-top: 6mm !important;
+    margin-bottom: 6mm !important;
+  }
+
+  .print-invoice .mb-10 {
+    margin-bottom: 6mm !important;
+  }
+
+  .print-invoice .mt-10 {
+    margin-top: 6mm !important;
+  }
+
+  .print-invoice .pt-8,
+  .print-invoice .pb-8 {
+    padding-top: 8pt !important;
+    padding-bottom: 5mm !important;
+  }
+
+  .print-invoice .p-8 {
+    padding: 6mm !important;
+  }
+
+  .print-invoice .sm\:p-12 {
+    padding: 8mm !important;
+  }
+
+  .print-invoice .p-6 {
+    padding: 5mm !important;
+  }
+
+  .print-invoice .p-5 {
+    padding: 4mm !important;
+  }
+
+  .print-invoice .text-3xl {
+    font-size: 16pt !important;
+  }
+
+  .print-invoice .text-2xl {
+    font-size: 14pt !important;
+  }
+
+  .print-invoice .text-lg {
+    font-size: 10.5pt !important;
+  }
+
+  .print-invoice table th,
+  .print-invoice table td {
+    font-size: 8.8pt !important;
+    padding: 3px 4px !important;
+  }
+
+  .print-invoice table,
+  .print-invoice th,
+  .print-invoice td {
+    border-width: 0.8px !important;
+  }
+
+  .print-invoice thead tr {
+    border-bottom-width: 1px !important;
+  }
+
+  .print-invoice .gap-6 {
+    gap: 4mm !important;
+  }
+
+  .print-invoice .rounded-xl,
+  .print-invoice .rounded-2xl {
+    border-radius: 4px !important;
+  }
+
+  .print-invoice .shadow-lg,
+  .print-invoice .shadow-sm,
+  .print-invoice .shadow {
+    box-shadow: none !important;
+  }
+
+  .print-invoice .max-w-4xl {
+    max-width: 160mm !important;
+  }
+
+  .print-invoice .space-y-2>*+* {
+    margin-top: 0.4rem !important;
+  }
+
+  .print-invoice .space-y-3>*+* {
+    margin-top: 0.5rem !important;
+  }
+
+  .print-invoice .space-y-4>*+* {
+    margin-top: 0.6rem !important;
+  }
+
+  /* Dedicated page padding to control top/bottom white space like the reference mock */
+  .print-invoice-page {
+    padding-top: 6mm !important;
+    padding-bottom: 8mm !important;
+  }
+
+  /* Remove accidental top/bottom gaps from children margins */
+  .print-invoice-page>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  .print-invoice-page>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* Optimized header spacing for invoices */
+  .print-invoice header {
+    margin-bottom: 8pt !important;
+    /* Closer to body */
+    padding-bottom: 3pt !important;
+  }
+
+  /* Smaller logo specifically for invoice */
+  .print-invoice header img {
+    max-height: 15pt !important;
+    /* Smaller for better proportion */
+    max-width: 60pt !important;
+    height: auto !important;
+    width: auto !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+    margin-bottom: 2pt !important;
+  }
+
+  /* Invoice header content optimization */
+  .print-invoice header .company-info {
+    margin-top: 3pt !important;
+  }
+
+  .print-invoice header .company-info p {
+    margin: 0 0 1pt 0 !important;
+    line-height: 1.1 !important;
+    font-size: 9pt !important;
+  }
+
+  /* Optimized receipt header */
+  .print-receipt header {
+    margin-bottom: 8pt !important;
+    padding-bottom: 3pt !important;
+  }
+
+  .print-receipt header img {
+    max-height: 18pt !important;
+    max-width: 50pt !important;
+    height: auto !important;
+    width: auto !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+    margin-bottom: 2pt !important;
+  }
+
+  
+
+  /* Neutralize utility heights in header during print */
+  .print-invoice header [class*="h-"] {
+    height: auto !important;
+  }
+
+  .print-receipt header [class*="h-"] {
+    height: auto !important;
+  }
+
+  .print-receipt h1 {
+    font-size: 14pt !important;
+  }
+
+  .print-receipt h2 {
+    font-size: 12pt !important;
+  }
+
+  .print-receipt .mt-12,
+  .print-receipt .mb-12 {
+    margin-top: 6mm !important;
+    margin-bottom: 6mm !important;
+  }
+
+  .print-receipt .p-8 {
+    padding: 8mm !important;
+  }
+
+  /* ===== BUKTI PEMBAYARAN/PAYMENT PROOF STYLING ===== */
+  .print-payment-proof {
+    font-family: 'Manrope', 'Inter', sans-serif !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    line-height: 1.2 !important;
+    font-size: 12pt !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .print-payment-proof header {
+    text-align: center !important;
+    margin-bottom: 15pt !important;
+    padding-bottom: 10pt !important;
+    border-bottom: 3px solid #dc2626 !important;
+  }
+  
+  .print-payment-proof header h1 {
+    font-size: 18pt !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    margin: 0 0 5pt 0 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+  }
+  
+  .print-payment-proof header p {
+    font-size: 10pt !important;
+    color: #64748b !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+  }
+  
+  .print-payment-proof .payment-amount-section {
+    background: linear-gradient(135deg, #fef2f2, #fecaca) !important;
+    border: 2px solid #dc2626 !important;
+    border-radius: 8pt !important;
+    padding: 15pt !important;
+    margin: 15pt 0 !important;
+    text-align: center !important;
+  }
+  
+  .print-payment-proof .payment-amount-section h3 {
+    font-size: 12pt !important;
+    font-weight: 700 !important;
+    color: #b91c1b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 0 5pt 0 !important;
+  }
+  
+  .print-payment-proof .payment-amount-section .amount {
+    font-size: 28pt !important;
+    font-weight: 800 !important;
+    color: #991b1b !important;
+    margin: 0 !important;
+    letter-spacing: -0.05em !important;
+    font-family: 'Manrope', monospace !important;
+  }
+  
+  /* ===== GENERAL DOCUMENT STYLING ===== */
+  
+  /* Common footer styling for all documents */
+  .printable-content footer {
+    margin-top: 20pt !important;
+    border-top: 2px solid #e2e8f0 !important;
+    padding-top: 10pt !important;
+    page-break-inside: avoid !important;
+  }
+  
+  .printable-content footer h4 {
+    font-size: 10pt !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 0 5pt 0 !important;
+  }
+  
+  .printable-content footer p {
+    font-size: 8pt !important;
+    color: #64748b !important;
+    line-height: 1.3 !important;
+    margin: 0 0 5pt 0 !important;
+  }
+  
+  .printable-content footer .text-center {
+    text-align: center !important;
+  }
+  
+  .printable-content footer .bg-blue-600 {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    height: 4pt !important;
+    border-radius: 2pt !important;
+    margin-top: 10pt !important;
+  }
+  
+  /* Common avoid-break class for all documents */
+  .avoid-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  
+  /* Common printable background colors */
+  .printable-bg-blue {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    color: white !important;
+  }
+  
+  .printable-text-white {
+    color: #ffffff !important;
+  }
+  
+  .print-text-green {
+    color: #16a34a !important;
+  }
+  
+  .printable-bg-green-light {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0) !important;
+  }
+  
+  /* Logo styling for all documents */
+  .printable-content img[alt="Company Logo"],
+  .printable-content header img {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+  
+  /* Common table styling improvements */
+  .printable-content table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    margin: 10pt 0 !important;
+  }
+  
+  .printable-content th,
+  .printable-content td {
+    border: 1px solid #334155 !important;
+    padding: 6pt !important;
+    text-align: left !important;
+    vertical-align: top !important;
+  }
+  
+  .printable-content th {
+    background-color: #f1f5f9 !important;
+    font-weight: 700 !important;
+    font-size: 9pt !important;
+    color: #475569 !important;
+  }
+  
+  /* Responsive font scaling for different document types */
+  @media print {
+    .document-compact {
+      font-size: 11pt !important;
+      line-height: 1.1 !important;
+    }
+    
+    .document-compact p {
+      margin: 0 0 6pt 0 !important;
+    }
+    
+    .document-compact h1,
+    .document-compact h2,
+    .document-compact h3,
+    .document-compact h4 {
+      margin: 10pt 0 6pt 0 !important;
+    }
+  }
+
+  /* Ensure the document sits naturally without modal constraints */
+  .app-modal-overlay {
+    position: static !important;
+    background: transparent !important;
+    inset: auto !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .app-modal-dialog {
+    position: static !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    max-height: none !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+
+  .modal-content-area,
+  .printable-area {
+    max-height: none !important;
+    overflow: visible !important;
+    padding-right: 0 !important;
+  }
+
+  /* Optimized header positioning - closer to document body */
+  .printable-area header {
+    margin-bottom: 8pt !important;
+    /* Reduced from default spacing */
+    padding-bottom: 5pt !important;
+  }
+
+  .printable-area header img {
+    max-height: 20mm !important;
+    /* Smaller logo for better proportion */
+    height: auto !important;
+    width: auto !important;
+    margin-bottom: 3pt !important;
+  }
+
+  .printable-area header .company-info {
+    margin-top: 5pt !important;
+    margin-bottom: 0 !important;
+  }
+
+  .printable-area header .company-info p {
+    margin: 0 0 2pt 0 !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Keep other images at reasonable size */
+  .printable-area img {
+    max-width: 100% !important;
+  }
+
+  /* Optimized document padding to bring content closer to header */
+  .printable-area .p-8 {
+    padding: 8pt 12pt !important;
+  }
+
+  /* Reduced top padding */
+  .printable-area .sm\:p-12 {
+    padding: 10pt 14pt !important;
+  }
+
+  /* Reduced top padding */
+
+  /* Document container optimization */
+  .printable-content {
+    padding-top: 0 !important;
+    /* Remove extra top padding */
+    margin-top: 0 !important;
+  }
+
+  /* Neutralize common utility constraints that can clip content */
+  .printable-area [class*="max-w-"] {
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+  .printable-area[class*="max-h-"],
+  .printable-area [class*="max-h-"] {
+    max-height: none !important;
+    height: auto !important;
+  }
+
+  .printable-area [class*="overflow-"] {
+    overflow: visible !important;
+  }
+
+  .printable-area[class*="overflow-"] {
+    overflow: visible !important;
+  }
+
+  .printable-area [class*="shadow"] {
+    box-shadow: none !important;
+  }
+
+  .printable-area .sticky,
+  .printable-area [class*="sticky"] {
+    position: static !important;
+    top: auto !important;
+  }
+
+  .printable-area .fixed {
+    position: static !important;
+    inset: auto !important;
+  }
+
+  .printable-area [class*="transform"],
+  .printable-area [style*="transform"] {
+    transform: none !important;
+  }
+
+  /* Exception: allow controlled transform scaling when we explicitly opt-in */
+  .printable-area .fit-to-page {
+    transform-origin: top left !important;
+  }
+
+  .printable-area .fit-to-page[data-fit-scale="true"] {
+    transform: var(--fit-scale) !important;
+  }
+
+  .printable-area .fit-to-page {
+    page-break-inside: avoid !important;
+    break-inside: avoid-page !important;
+  }
+
+  .printable-area *,
+  .printable-area *::before,
+  .printable-area *::after {
+    box-sizing: border-box !important;
+  }
+
+  .printable-area .non-printable {
+    display: none !important;
+  }
+
+  .printable-area .overflow-x-auto {
+    overflow-x: visible !important;
+  }
+
+  /* Keep a safe printable width to avoid right-edge clipping while preserving margins */
+  /* Place AFTER neutralizers so it wins in cascade */
+  /* A4 width (210mm) minus margins (2.5cm * 2 = 5cm = 50mm) = 160mm usable width */
+  .printable-area .mx-auto {
+    max-width: 160mm !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .printable-area [class*="max-w-4xl"] {
+    max-width: 160mm !important;
+  }
+
+  /* Printable content base: switch to formal serif for paper */
+  .printable-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+    color: black !important;
+    /* Use the same font as the app for consistent look */
+    font-family: 'Manrope', sans-serif !important;
+  }
+
+  /* Enhanced Indonesian Typography Standards - 1.15-1.2 line spacing */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #000 !important;
+    page-break-after: avoid;
+    margin-top: 12pt !important;
+    margin-bottom: 6pt !important;
+    font-family: 'Manrope', sans-serif !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    /* Indonesian standard line spacing */
+  }
+
+  h1 {
+    font-size: 20pt !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    margin-top: 0 !important;
+    margin-bottom: 12pt !important;
+  }
+
+  h2 {
+    font-size: 18pt !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    margin-top: 16pt !important;
+    margin-bottom: 8pt !important;
+  }
+
+  h3 {
+    font-size: 16pt !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    margin-top: 14pt !important;
+    margin-bottom: 7pt !important;
+  }
+
+  h4 {
+    font-size: 14pt !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    margin-top: 12pt !important;
+    margin-bottom: 6pt !important;
+  }
+
+  h5 {
+    font-size: 13pt !important;
+    font-weight: 600 !important;
+    text-align: left !important;
+    margin-top: 10pt !important;
+    margin-bottom: 5pt !important;
+  }
+
+  h6 {
+    font-size: 12pt !important;
+    font-weight: 600 !important;
+    text-align: left !important;
+    margin-top: 8pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  /* Enhanced paragraph typography with Indonesian standards - 1.2 line spacing */
+  p {
+    margin: 0 0 8pt 0 !important;
+    /* 8pt spacing after paragraphs - Indonesian standard */
+    text-align: justify !important;
+    orphans: 2;
+    widows: 2;
+    font-size: 12pt !important;
+    line-height: 1.2 !important;
+    /* Indonesian standard line spacing for optimal readability */
+    font-family: 'Manrope', sans-serif !important;
+  }
+
+  /* Special paragraph types with optimized spacing */
+  .document-intro p {
+    text-align: center !important;
+    font-weight: 500 !important;
+    margin-bottom: 12pt !important;
+  }
+
+  .document-body p {
+    text-indent: 12pt !important;
+    /* First line indent for formal documents */
+  }
+
+  .signature-area p {
+    text-align: center !important;
+    margin-bottom: 6pt !important;
+    text-indent: 0 !important;
+  }
+
+  /* Enhanced document spacing and alignment */
+
+  /* Contract document typography with proper hierarchy */
+  .contract-document {
+    font-family: 'Manrope', sans-serif !important;
+  }
+
+  .contract-document .contract-title {
+    font-size: 18pt !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    margin: 0 0 16pt 0 !important;
+    line-height: 1.22 !important;
+    /* Relaxed for contracts */
+  }
+
+  .contract-document .contract-clause {
+    margin-bottom: 10pt !important;
+  }
+
+  .contract-document .contract-clause-title {
+    font-weight: bold !important;
+    margin-bottom: 6pt !important;
+    font-size: 12pt !important;
+  }
+
+  .contract-document .contract-clause-content {
+    margin-left: 15pt !important;
+    margin-bottom: 8pt !important;
+  }
+
+  /* Invoice document typography with optimized spacing */
+  .invoice-document {
+    font-family: 'Manrope', sans-serif !important;
+  }
+
+  .invoice-document .invoice-title {
+    font-size: 20pt !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    margin: 0 0 12pt 0 !important;
+  }
+
+  .invoice-document .invoice-number {
+    font-size: 14pt !important;
+    font-weight: 600 !important;
+    margin-bottom: 8pt !important;
+  }
+
+  /* Enhanced list styling for contracts and documents */
+  ul,
+  ol {
+    margin: 8pt 0 12pt 0 !important;
+    padding-left: 20pt !important;
+  }
+
+  li {
+    margin-bottom: 4pt !important;
+    line-height: 1.2 !important;
+    font-size: 12pt !important;
+  }
+
+  /* Nested list spacing with proper hierarchy */
+  ul ul,
+  ol ol,
+  ul ol,
+  ol ul {
+    margin: 4pt 0 4pt 0 !important;
+  }
+
+  /* Enhanced text emphasis styling */
+  strong,
+  b {
+    font-weight: 700 !important;
+  }
+
+  em,
+  i {
+    font-style: italic !important;
+  }
+
+  /* A4 helper (optional wrapper) */
+  .print-a4 {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 auto !important;
+  }
+
+  /* Tables and borders look crisp in print */
+  /* Improved table styling with better borders and spacing */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 10pt 0 !important;
+    page-break-inside: avoid !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
+
+  tfoot {
+    display: table-footer-group !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  th,
+  td {
+    page-break-inside: avoid !important;
+    border: 1px solid #333 !important;
+    padding: 6pt 8pt !important;
+    text-align: left !important;
+    vertical-align: top !important;
+  }
+
+  th {
+    background-color: #f5f5f9 !important;
+    font-weight: 700 !important;
+    font-size: 11pt !important;
+    line-height: 1.15 !important;
+    color: #475569 !important;
+  }
+
+  td {
+    font-size: 11pt !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Special typography for document elements */
+  .document-date {
+    text-align: right !important;
+    font-size: 12pt !important;
+    margin-bottom: 12pt !important;
+    font-weight: 500 !important;
+  }
+
+  .document-address {
+    line-height: 1.15 !important;
+    margin-bottom: 8pt !important;
+  }
+
+  .document-address p {
+    margin-bottom: 3pt !important;
+    text-align: left !important;
+    text-indent: 0 !important;
+  }
+
+  /* Enhanced signature section with proper spacing */
+  .signature-section {
+    margin-top: 24pt !important;
+    page-break-inside: avoid !important;
+  }
+
+  .signature-title {
+    font-weight: bold !important;
+    text-align: center !important;
+    margin-bottom: 8pt !important;
+    font-size: 12pt !important;
+  }
+
+  .signature-line {
+    border-bottom: 1pt solid #64748b !important;
+    margin: 20pt 0 6pt 0 !important;
+    height: 1pt !important;
+  }
+
+  .signature-name {
+    text-align: center !important;
+    font-weight: 600 !important;
+    margin-bottom: 4pt !important;
+    font-size: 12pt !important;
+  }
+
+  .signature-position {
+    text-align: center !important;
+    font-size: 11pt !important;
+    color: #333 !important;
+  }
+
+  /* Enhanced currency formatting in print */
+  .currency-amount {
+    font-weight: 600 !important;
+    text-align: right !important;
+    font-family: 'Manrope', monospace !important;
+    /* Monospace for better number alignment */
+  }
+
+  .total-amount {
+    font-weight: bold !important;
+    font-size: 13pt !important;
+  }
+
+  /* Enhanced table header styling for better separation */
+  th {
+    border-bottom: 2px solid #333 !important;
+  }
+
+  /* Enhanced invoice table with invisible grid system */
+  .invoice-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 10pt 0 !important;
+  }
+
+  .invoice-table th,
+  .invoice-table td {
+    border: none !important;
+    /* Invisible borders for alignment */
+    padding: 4pt 8pt !important;
+    vertical-align: top !important;
+    text-align: left !important;
+  }
+
+  .invoice-table th {
+    font-weight: bold !important;
+    border-bottom: 1px solid #333 !important;
+    /* Only header border */
+  }
+
+  /* Enhanced column alignment for invoice items */
+  .invoice-table .col-description {
+    text-align: left !important;
+    width: 50% !important;
+  }
+
+  .invoice-table .col-quantity {
+    text-align: center !important;
+    width: 15% !important;
+  }
+
+  .invoice-table .col-price {
+    text-align: right !important;
+    width: 17.5% !important;
+  }
+
+  .invoice-table .col-total {
+    text-align: right !important;
+    width: 17.5% !important;
+    font-weight: bold !important;
+  }
+
+  /* Enhanced invoice totals with better alignment */
+  .invoice-totals {
+    margin-top: 15pt !important;
+    text-align: right !important;
+  }
+
+  .invoice-totals table {
+    margin-left: auto !important;
+    width: auto !important;
+    min-width: 200pt !important;
+  }
+
+  .invoice-totals td {
+    border: none !important;
+    padding: 2pt 8pt !important;
+  }
+
+  .invoice-totals .total-label {
+    text-align: right !important;
+    font-weight: normal !important;
+  }
+
+  .invoice-totals .total-amount {
+    text-align: right !important;
+    font-weight: bold !important;
+  }
+
+  /* Enhanced signature section styling */
+  .signature-section,
+  section {
+    page-break-inside: avoid !important;
+  }
+
+  .signature-section {
+    margin-top: 30pt !important;
+    padding-top: 15pt !important;
+    border-top: 1px solid #333 !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Enhanced symmetrical signature layout */
+  .signature-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    margin-top: 20pt !important;
+  }
+
+  /* Enhanced signature columns */
+  .signature-column {
+    width: 45% !important;
+    text-align: center !important;
+    display: inline-block !important;
+    vertical-align: top !important;
+  }
+
+  .signature-column h5 {
+    font-size: 12pt !important;
+    font-weight: bold !important;
+    margin: 0 0 5pt 0 !important;
+    text-transform: uppercase !important;
+  }
+
+  .signature-column .party-name {
+    font-size: 10pt !important;
+    margin: 0 0 15pt 0 !important;
+    font-style: italic !important;
+  }
+
+  /* Enhanced signature image area */
+  .signature-image-area {
+    height: 60pt !important;
+    margin: 10pt 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-bottom: 1px solid #333 !important;
+  }
+
+  .signature-image-area img {
+    max-height: 50pt !important;
+    max-width: 120pt !important;
+    object-fit: contain !important;
+  }
+
+  .signature-image-area .no-signature {
+    font-style: italic !important;
+    color: #666 !important;
+    font-size: 9pt !important;
+  }
+
+  /* Enhanced signature name line */
+  .signature-name {
+    margin-top: 8pt !important;
+    font-size: 11pt !important;
+    font-weight: bold !important;
+    border-top: 1px dotted #333 !important;
+    padding-top: 5pt !important;
+    width: 80% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Enhanced legacy signature area support */
+  .signature-area {
+    display: inline-block !important;
+    width: 45% !important;
+    text-align: center !important;
+    vertical-align: top !important;
+  }
+
+  .signature-area img {
+    max-height: 50pt !important;
+    max-width: 120pt !important;
+    object-fit: contain !important;
+  }
+
+  .border-t-2 {
+    border-top: 1px dotted #333 !important;
+    padding-top: 5pt !important;
+    margin-top: 8pt !important;
+  }
+
+  /* Enhanced colored sections with better contrast */
+  .printable-bg-blue {
+    background-color: #2563eb !important;
+    color: white !important;
+  }
+
+  .printable-bg-green-light {
+    background-color: rgba(34, 197, 94, 0.10) !important;
+  }
+
+  .printable-text-white {
+    color: #ffffff !important;
+  }
+
+  .print-text-green {
+    color: #16a34a !important;
+  }
+
+  /* Enhanced page-break control with better spacing */
+  .avoid-break,
+  header,
+  footer,
+  .signature-section {
+    page-break-inside: avoid !important;
+  }
+
+  .page-break-before {
+    page-break-before: always !important;
+  }
+
+  .page-break-after {
+    page-break-after: always !important;
+  }
+
+  /* Enhanced spacing utilities with Indonesian standards */
+  .space-y-4>*+* {
+    margin-top: 8pt !important;
+  }
+
+  .my-4 {
+    margin: 8pt 0 !important;
+  }
+
+  .mt-6 {
+    margin-top: 12pt !important;
+  }
+
+  .mb-6 {
+    margin-bottom: 12pt !important;
+  }
+
+  /* Enhanced contract structure styling */
+  .contract-content {
+    margin-top: 20pt !important;
+  }
+
+  .contract-section {
+    margin-bottom: 15pt !important;
+    page-break-inside: avoid !important;
+  }
+
+  .contract-heading {
+    font-size: 13pt !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    margin: 15pt 0 8pt 0 !important;
+    border-bottom: 1px solid #333 !important;
+    padding-bottom: 3pt !important;
+    text-transform: uppercase !important;
+  }
+
+  .contract-subsection {
+    margin-left: 15pt !important;
+    margin-top: 5pt !important;
+  }
+
+  .contract-subsection p {
+    margin: 0 0 6pt 0 !important;
+    text-align: justify !important;
+    line-height: 1.2 !important;
+  }
+
+@media print {
+  /* Enhanced document separators */
+  .document-separator {
+    border-top: 2px solid #cbd5e1 !important;
+    margin: 20pt 0 !important;
+    height: 1px !important;
+  }
+
+  .section-separator {
+    border-top: 1px solid #333 !important;
+    margin: 15pt 0 10pt 0 !important;
+    height: 1px !important;
+  }
+
+  /* Enhanced professional document styling */
+  .document-header {
+    border-bottom: 2px solid #333 !important;
+    padding-bottom: 10pt !important;
+    margin-bottom: 20pt !important;
+  }
+
+  .document-title {
+    text-align: center !important;
+    font-size: 16pt !important;
+    font-weight: bold !important;
+    margin: 0 0 5pt 0 !important;
+    text-transform: uppercase !important;
+  }
+
+  .document-subtitle {
+    text-align: center !important;
+    font-size: 14pt !important;
+    font-weight: bold !important;
+    margin: 0 0 15pt 0 !important;
+  }
+
+  /* Enhanced party information styling */
+  .party-section {
+    margin: 12pt 0 !important;
+    padding: 8pt 0 !important;
+  }
+
+  .party-title {
+    font-weight: bold !important;
+    font-size: 12pt !important;
+    margin: 0 0 5pt 0 !important;
+    text-transform: uppercase !important;
+  }
+
+  .party-details {
+    margin-left: 12pt !important;
+    text-align: justify !important;
+  }
+
+  /* Enhanced document-specific print sizing */
+  .print-invoice,
+  .print-invoice * {
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 11pt !important;
+    line-height: 1.15 !important;
+    /* Indonesian standard */
+  }
+
+  .print-receipt,
+  .print-receipt * {
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 11pt !important;
+    line-height: 1.15 !important;
+    /* Indonesian standard */
+  }
+
+  
+
+  .print-invoice p {
+    line-height: 1.15 !important;
+    margin: 0 0 6pt 0 !important;
+    /* 6pt paragraph spacing for invoices */
+  }
+
+  .print-receipt p {
+    line-height: 1.15 !important;
+    margin: 0 0 6pt 0 !important;
+    /* 6pt paragraph spacing for receipts */
+  }
+
+  /* Compact spacing for invoice/receipt to fit one page */
+  .print-invoice h1 {
+    font-size: 14.5pt !important;
+  }
+
+  .print-invoice h2 {
+    font-size: 12.5pt !important;
+  }
+
+  .print-invoice h3 {
+    font-size: 10.5pt !important;
+  }
+
+  .print-invoice .mt-12,
+  .print-invoice .mb-12 {
+    margin-top: 6mm !important;
+    margin-bottom: 6mm !important;
+  }
+
+  .print-invoice .mb-10 {
+    margin-bottom: 6mm !important;
+  }
+
+  .print-invoice .mt-10 {
+    margin-top: 6mm !important;
+  }
+
+  .print-invoice .pt-8,
+  .print-invoice .pb-8 {
+    padding-top: 8pt !important;
+    padding-bottom: 5mm !important;
+  }
+
+  .print-invoice .p-8 {
+    padding: 6mm !important;
+  }
+
+  .print-invoice .sm\:p-12 {
+    padding: 8mm !important;
+  }
+
+  .print-invoice .p-6 {
+    padding: 5mm !important;
+  }
+
+  .print-invoice .p-5 {
+    padding: 4mm !important;
+  }
+
+  .print-invoice .text-3xl {
+    font-size: 16pt !important;
+  }
+
+  .print-invoice .text-2xl {
+    font-size: 14pt !important;
+  }
+
+  .print-invoice .text-lg {
+    font-size: 10.5pt !important;
+  }
+
+  .print-invoice table th,
+  .print-invoice table td {
+    font-size: 8.8pt !important;
+    padding: 3px 4px !important;
+  }
+
+  .print-invoice table,
+  .print-invoice th,
+  .print-invoice td {
+    border-width: 0.8px !important;
+  }
+
+  .print-invoice thead tr {
+    border-bottom-width: 1px !important;
+  }
+
+  .print-invoice .gap-6 {
+    gap: 4mm !important;
+  }
+
+  .print-invoice .rounded-xl,
+  .print-invoice .rounded-2xl {
+    border-radius: 4px !important;
+  }
+
+  .print-invoice .shadow-lg,
+  .print-invoice .shadow-sm,
+  .print-invoice .shadow {
+    box-shadow: none !important;
+  }
+
+.print-invoice .max-w-4xl {
+    max-width: 160mm !important;
+  }
+
+  .print-invoice .space-y-2>*+* {
+    margin-top: 0.4rem !important;
+  }
+
+  .print-invoice .space-y-3>*+* {
+    margin-top: 0.5rem !important;
+  }
+
+  .print-invoice .space-y-4>*+* {
+    margin-top: 0.6rem !important;
+  }
+
+  /* Dedicated page padding to control top/bottom white space like the reference mock */
+  .print-invoice-page {
+    padding-top: 6mm !important;
+    padding-bottom: 8mm !important;
+  }
+
+  /* Remove accidental top/bottom gaps from children margins */
+  .print-invoice-page>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  .print-invoice-page>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* Optimized header spacing for invoices */
+  .print-invoice header {
+    margin-bottom: 8pt !important;
+    /* Closer to body */
+    padding-bottom: 3pt !important;
+  }
+
+  /* Smaller logo specifically for invoice */
+  .print-invoice header img {
+    max-height: 15pt !important;
+    /* Smaller for better proportion */
+    max-width: 60pt !important;
+    height: auto !important;
+    width: auto !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+    margin-bottom: 2pt !important;
+  }
+
+  /* Invoice header content optimization */
+  .print-invoice header .company-info {
+    margin-top: 3pt !important;
+  }
+
+  .print-invoice header .company-info p {
+    margin: 0 0 1pt 0 !important;
+    line-height: 1.1 !important;
+    font-size: 9pt !important;
+  }
+
+  /* Optimized receipt header */
+  .print-receipt header {
+    margin-bottom: 8pt !important;
+    padding-bottom: 3pt !important;
+  }
+
+  .print-receipt header img {
+    max-height: 18pt !important;
+    max-width: 50pt !important;
+    height: auto !important;
+    width: auto !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+    margin-bottom: 2pt !important;
+  }
+
+  
+
+  /* Neutralize utility heights in header during print */
+  .print-invoice header [class*="h-"] {
+    height: auto !important;
+  }
+
+  .print-receipt header [class*="h-"] {
+    height: auto !important;
+  }
+
+  .print-receipt h1 {
+    font-size: 14pt !important;
+  }
+
+  .print-receipt h2 {
+    font-size: 12pt !important;
+  }
+
+  .print-receipt .mt-12,
+  .print-receipt .mb-12 {
+    margin-top: 6mm !important;
+    margin-bottom: 6mm !important;
+  }
+
+  .print-receipt .p-8 {
+    padding: 8mm !important;
+  }
+}
+
+/* Screen fallback only: when JS adds body.printing, mimic print visibility for on-screen preview */
+@media screen {
+  body.printing * {
+    visibility: hidden !important;
+  }
+
+  body.printing #invoice,
+  body.printing #invoice * {
+    visibility: visible !important;
+  }
+
+  body.printing .printable-area,
+  body.printing .printable-area * {
+    visibility: visible !important;
+  }
+
+  body.printing .app-modal-dialog {
+    position: static !important;
+    margin: 0 !important;
+  }
+
+  /* Match on-screen preview width to actual print width */
+  body.printing .printable-area .mx-auto {
+    max-width: 160mm !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  body.printing .max-w-4xl {
+    max-width: 160mm !important;
+  }
+
+  /* Show scaled preview on screen the same as print scaling */
+  body.printing .fit-to-page {
+    transform-origin: top left !important;
+  }
+  body.printing .fit-to-page[data-fit-scale="true"] {
+    transform: var(--fit-scale) !important;
+  }
+  
+  /* Direct print support: hide print dialog related elements */
+  body.direct-printing .app-modal-overlay {
+    display: none !important;
+  }
+  
+  body.direct-printing .non-printable,
+  body.direct-printing button:not(.printable),
+  body.direct-printing .button-primary:not(.printable),
+  body.direct-printing .button-secondary:not(.printable) {
+    display: none !important;
+  }
+}
+
+/* PWA support styles */
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Enhanced scrollbar for all elements */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-secondary);
+}
+
+/* iOS momentum scrolling for all scrollable elements */
+.scroll-smooth {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better form controls for mobile */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-border);
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced mobile navigation animations */
+.nav-slide-in {
+  animation: slideInFromLeft 0.3s ease-out;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Better mobile modal behavior */
+.modal-mobile {
+  padding: 16px;
+  max-height: calc(100vh - 32px);
+}
+
+@media (max-width: 480px) {
+  .modal-mobile {
+    margin: 0;
+    padding: 12px;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
+
+/* Enhanced grid system for mobile */
+.grid-responsive {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Better typography scaling */
+.heading-responsive {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.text-responsive {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  line-height: 1.6;
+}
+
+/* Enhanced mobile-first approach */
+.container-responsive {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-responsive {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-responsive {
+    padding: 0 4rem;
+  }
+}
+
+/* Touch-friendly dropdowns */
+.dropdown-mobile {
+  position: relative;
+}
+
+.dropdown-mobile select {
+  appearance: none;
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+/* Better mobile typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  h4 {
+    font-size: 1.125rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 0.875rem;
+  }
+}
+
+
+
+
+/* Mobile invoice table layout fixes */
+@media (max-width: 768px) {
+  /* Convert invoice table to card-based layout on mobile */
+  .invoice-table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+  }
+  
+  .invoice-table thead,
+  .invoice-table .invoice-table-header {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  .invoice-table tbody {
+    display: block !important;
+    margin-top: 16px !important;
+  }
+  
+  .invoice-table tr {
+    display: block !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    margin-bottom: 12px !important;
+    padding: 16px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .invoice-table td {
+    display: block !important;
+    border: none !important;
+    padding: 8px 0 !important;
+    position: relative !important;
+    padding-left: 40% !important;
+    text-align: left !important;
+  }
+  
+  .invoice-table td:before {
+    content: attr(data-label) !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 8px !important;
+    width: 35% !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    font-size: 0.875rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+  }
+  
+  /* Override the data-label attributes with Indonesian labels */
+  .invoice-table td:nth-child(1):before { content: "Deskripsi" !important; }
+  .invoice-table td:nth-child(2):before { content: "Jumlah" !important; }
+  .invoice-table td:nth-child(3):before { content: "Harga Satuan" !important; }
+  .invoice-table td:nth-child(4):before { content: "Total" !important; }
+  
+  /* Style the content appropriately */
+  .invoice-table td:nth-child(1) {
+    font-weight: 600 !important;
+    color: #1e293b !important;
+  }
+  
+  .invoice-table td:nth-child(1) .invoice-item-description {
+    max-width: none !important;
+  }
+  
+  .invoice-table td:nth-child(2),
+  .invoice-table td:nth-child(3),
+  .invoice-table td:nth-child(4) {
+    font-family: 'Manrope', monospace !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+  }
+  
+  .invoice-table td:nth-child(4) {
+    font-weight: 700 !important;
+    color: #059669 !important;
+  }
+  
+  /* Apply same mobile layout to ClientPortal invoice tables */
+  .print-invoice table,
+  .printable-content.print-invoice table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+  }
+  
+  .print-invoice thead,
+  .printable-content.print-invoice thead,
+  .print-invoice .invoice-table-header,
+  .printable-content.print-invoice .invoice-table-header {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  .print-invoice tbody,
+  .printable-content.print-invoice tbody {
+    display: block !important;
+  }
+  
+  .print-invoice tr,
+  .printable-content.print-invoice tr {
+    display: block !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    margin-bottom: 12px !important;
+    padding: 16px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .print-invoice td,
+  .printable-content.print-invoice td {
+    display: block !important;
+    border: none !important;
+    padding: 8px 0 !important;
+    position: relative !important;
+    padding-left: 40% !important;
+    text-align: left !important;
+  }
+  
+  .print-invoice td:before,
+  .printable-content.print-invoice td:before {
+    content: attr(data-label) !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 8px !important;
+    width: 35% !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    font-size: 0.875rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+  }
+  
+  /* Override with Indonesian labels for ClientPortal */
+  .print-invoice td:nth-child(1):before,
+  .printable-content.print-invoice td:nth-child(1):before { content: "Deskripsi" !important; }
+  .print-invoice td:nth-child(2):before,
+  .printable-content.print-invoice td:nth-child(2):before { content: "Jumlah" !important; }
+  
+  /* Additional mobile-specific fixes to prevent header overlap */
+  section table.invoice-table thead,
+  section .invoice-table thead,
+  .invoice-table-header {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  
+  /* Ensure proper spacing between sections */
+  section.mt-6.mb-6 {
+    margin-top: 24px !important;
+  }
+  .print-invoice td:nth-child(3):before,
+  .printable-content.print-invoice td:nth-child(3):before { content: "Harga Satuan" !important; }
+  .print-invoice td:nth-child(4):before,
+  .printable-content.print-invoice td:nth-child(4):before { content: "Total" !important; }
+  
+  /* Style the content appropriately for ClientPortal */
+  .print-invoice td:nth-child(1),
+  .printable-content.print-invoice td:nth-child(1) {
+    font-weight: 600 !important;
+    color: #1e293b !important;
+  }
+  
+  .print-invoice td:nth-child(2),
+  .print-invoice td:nth-child(3),
+  .print-invoice td:nth-child(4),
+  .printable-content.print-invoice td:nth-child(2),
+  .printable-content.print-invoice td:nth-child(3),
+  .printable-content.print-invoice td:nth-child(4) {
+    font-family: 'Manrope', monospace !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+  }
+  
+  .print-invoice td:nth-child(4),
+  .printable-content.print-invoice td:nth-child(4) {
+    font-weight: 700 !important;
+    color: #059669 !important;
+  }
+  
+  /* Mobile layout for invoice signature and totals section */
+  .print-invoice .flex.justify-between,
+  .printable-content.print-invoice .flex.justify-between {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  
+  /* Signature section mobile styling */
+  .print-invoice .w-2\/5:first-child,
+  .printable-content.print-invoice .w-2\/5:first-child {
+    width: 100% !important;
+    order: 2 !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .print-invoice .w-2\/5:first-child h4,
+  .printable-content.print-invoice .w-2\/5:first-child h4 {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* Totals section mobile styling */
+  .print-invoice .w-2\/5:last-child,
+  .printable-content.print-invoice .w-2\/5:last-child {
+    width: 100% !important;
+    order: 1 !important;
+  }
+  
+  .print-invoice .space-y-2,
+  .printable-content.print-invoice .space-y-2 {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .print-invoice .space-y-2 > div,
+  .printable-content.print-invoice .space-y-2 > div {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+  
+  .print-invoice .space-y-2 > div:last-child,
+  .printable-content.print-invoice .space-y-2 > div:last-child {
+    border-bottom: none !important;
+    border-top: 2px solid #64748b !important;
+    padding-top: 12px !important;
+    margin-top: 8px !important;
+    font-weight: 700 !important;
+    font-size: 1.125rem !important;
+  }
+  
+  .print-invoice .space-y-2 span:first-child,
+  .printable-content.print-invoice .space-y-2 span:first-child {
+    color: #64748b !important;
+    font-weight: 600 !important;
+  }
+  
+  .print-invoice .space-y-2 span:last-child,
+  .printable-content.print-invoice .space-y-2 span:last-child {
+    font-family: 'Manrope', monospace !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+  }
+  
+  /* Special styling for final total */
+  .print-invoice .space-y-2 > div:last-child span:last-child,
+  .printable-content.print-invoice .space-y-2 > div:last-child span:last-child {
+    color: #dc2626 !important;
+    font-weight: 700 !important;
+  }
+}
+
+/*
+Portal-specific print styles */
+@media print {
+  /* Client Portal and Freelancer Portal document styling */
+  .print-portal-document {
+    font-family: 'Manrope', sans-serif !important;
+    line-height: 1.15 !important;
+    font-size: 12pt !important;
+  }
+
+  .print-portal-document p {
+    margin: 0 0 8pt 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  .print-portal-document h1,
+  .print-portal-document h2,
+  .print-portal-document h3,
+  .print-portal-document h4 {
+    margin: 15pt 0 8pt 0 !important;
+    font-weight: bold !important;
+  }
+
+  .print-portal-document h2 {
+    font-size: 16pt !important;
+    text-align: center !important;
+  }
+
+  .print-portal-document h3 {
+    font-size: 14pt !important;
+  }
+
+  .print-portal-document h4 {
+    font-size: 13pt !important;
+  }
+
+  /* Portal table styling */
+  .print-portal-document table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 10pt 0 !important;
+  }
+
+  .print-portal-document th,
+  .print-portal-document td {
+    border: 1px solid #333 !important;
+    padding: 6pt 8pt !important;
+    text-align: left !important;
+    vertical-align: top !important;
+  }
+
+  .print-portal-document th {
+    background-color: #f5f5f5 !important;
+    font-weight: bold !important;
+  }
+
+  /* Portal signature areas */
+  .print-portal-document .signature-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-top: 30pt !important;
+    page-break-inside: avoid !important;
+  }
+
+  .print-portal-document .signature-column {
+    width: 45% !important;
+    text-align: center !important;
+  }
+
+  .print-portal-document .signature-column h5 {
+    font-size: 12pt !important;
+    font-weight: bold !important;
+    margin: 0 0 5pt 0 !important;
+    text-transform: uppercase !important;
+  }
+
+  .print-portal-document .signature-image-area {
+    height: 60pt !important;
+    margin: 10pt 0 !important;
+    border-bottom: 1px solid #333 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .print-portal-document .signature-image-area img {
+    max-height: 50pt !important;
+    max-width: 120pt !important;
+    object-fit: contain !important;
+  }
+
+  .print-portal-document .signature-name {
+    margin-top: 8pt !important;
+    font-size: 11pt !important;
+    font-weight: bold !important;
+    border-top: 1px dotted #333 !important;
+    padding-top: 5pt !important;
+  }
+
+  /* Typography optimization for different document lengths */
+  .document-compact {
+    font-size: 11pt !important;
+    line-height: 1.15 !important;
+  }
+
+  .document-compact p {
+    margin-bottom: 6pt !important;
+  }
+
+  .document-compact h1,
+  .document-compact h2,
+  .document-compact h3,
+  .document-compact h4 {
+    margin-top: 8pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  .document-standard {
+    font-size: 12pt !important;
+    line-height: 1.2 !important;
+  }
+
+  .document-expanded {
+    font-size: 13pt !important;
+    line-height: 1.25 !important;
+  }
+
+  .document-expanded p {
+    margin-bottom: 10pt !important;
+  }
+
+  .document-legal {
+    font-family: 'Times New Roman', serif !important;
+    font-size: 12pt !important;
+    line-height: 1.15 !important;
+    text-align: justify !important;
+  }
+
+  .document-legal p {
+    text-indent: 12pt !important;
+    margin-bottom: 6pt !important;
+  }
+
+  .document-business {
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 12pt !important;
+    line-height: 1.2 !important;
+  }
+
+  .document-business .letterhead {
+    text-align: center !important;
+    margin-bottom: 16pt !important;
+  }
+
+  .document-business .date-line {
+    text-align: right !important;
+    margin-bottom: 12pt !important;
+  }
+
+  .document-business .salutation {
+    margin-bottom: 8pt !important;
+  }
+
+  .document-business .closing {
+    margin-top: 16pt !important;
+    text-align: left !important;
+  }
+
+  /* Accessibility enhancements for print */
+  .high-contrast-print {
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  .high-contrast-print strong,
+  .high-contrast-print b {
+    font-weight: 900 !important;
+  }
+
+  /* Print-specific text utilities */
+  .print-text-center {
+    text-align: center !important;
+  }
+
+  .print-text-left {
+    text-align: left !important;
+  }
+
+  .print-text-right {
+    text-align: right !important;
+  }
+
+  .print-text-justify {
+    text-align: justify !important;
+  }
+
+  .print-font-bold {
+    font-weight: 700 !important;
+  }
+
+  .print-font-semibold {
+    font-weight: 600 !important;
+  }
+
+  .print-font-normal {
+    font-weight: 400 !important;
+  }
+
+  /* Line height utilities for print */
+  .print-leading-tight {
+    line-height: 1.1 !important;
+  }
+
+  .print-leading-normal {
+    line-height: 1.2 !important;
+  }
+
+  .print-leading-relaxed {
+    line-height: 1.3 !important;
+  }
+}
+
+} /* Close the second @media print block */
+
+/* Button styles for primary actions - Enhanced with better hover states and accessibility */
+.button-primary {
+  background-color: hsl(var(--brand-accent));
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  text-decoration: none;
+  user-select: none;
+}
+
+.button-primary:hover {
+  background-color: hsl(var(--brand-accent-hover, var(--brand-accent)));
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.button-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.button-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--brand-accent-rgb, 59, 130, 246), 0.5);
+}
+
+.button-primary:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+  box-shadow: none;
+}
+
+.button-primary:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Button styles for secondary actions */
+.button-secondary {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #1d4ed8;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  text-decoration: none;
+  user-select: none;
+}
+
+.button-secondary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px 0 rgba(37, 99, 235, 0.3);
+}
+
+.button-secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: #1e40af;
+}
+
+.button-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
+}
+
+.button-secondary:disabled {
+  background-color: #93c5fd;
+  color: #ffffff;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Mobile small phones: shrink input/select text size on non-iOS devices to avoid iOS zoom */
+@media (max-width: 480px) {
+  /* Exclude iOS by checking html:not(.ios) set in index.html */
+  html:not(.ios) input,
+  html:not(.ios) textarea,
+  html:not(.ios) select,
+  html:not(.ios) .input-field,
+  html:not(.ios) select.input-field {
+    font-size: 14px !important;
+  }
+
+  html:not(.ios) input::placeholder,
+  html:not(.ios) textarea::placeholder {
+    font-size: 14px !important;
+  }
+}
+
+/* Also shrink floating labels and helper text on small phones (non-iOS) */
+@media (max-width: 480px) {
+  html:not(.ios) .input-label {
+    font-size: 12px !important;
+  }
+  html:not(.ios) .input-helper-text {
+    font-size: 12px !important;
+  }
+  /* Compact input/select spacing */
+  html:not(.ios) .input-field {
+    min-height: 36px !important;
+    padding: 8px 10px !important;
+    line-height: 1.3 !important;
+  }
+  html:not(.ios) select.input-field {
+    padding-right: 2.5rem !important;
+  }
+}
+
+/* Mobile Compact Form: shrink Text Field, Select, keep Textarea multi-line, and tighten form spacing */
+@media (max-width: 768px) {
+  /* Apply to forms wrapped with .form-compact to avoid global side effects */
+  .form-compact {
+    gap: 12px !important;
+  }
+
+  .form-compact .form-group,
+  .form-compact .input-group {
+    margin-bottom: 10px !important;
+  }
+
+  /* Text Field (single line) */
+  .form-compact input.input-field {
+    font-size: 16px !important; /* prevent iOS zoom */
+    min-height: 40px !important;
+    padding: 10px 12px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Dropdown / Select Field */
+  .form-compact select.input-field {
+    font-size: 16px !important; /* prevent iOS zoom */
+    min-height: 40px !important;
+    padding: 10px 2.5rem 10px 12px !important; /* keep arrow space */
+    line-height: 1.3 !important;
+    background-position: right 0.75rem center !important;
+  }
+
+  /* Textarea (multi-line) */
+  .form-compact textarea.input-field {
+    font-size: 16px !important; /* prevent iOS zoom */
+    min-height: 140px !important; /* bigger box, many lines */
+    padding: 10px 12px !important;
+    line-height: 1.5 !important;
+    resize: vertical !important;
+  }
+
+  /* Labels and helper text slightly smaller but readable */
+  .form-compact .input-label { font-size: 0.9rem !important; }
+  .form-compact .input-helper-text { font-size: 0.8rem !important; }
+
+  /* Form container padding (optional) */
+  .form-compact .form-body,
+  .form-compact form {
+    padding: 8px !important;
+  }
+}
+
+/* Extra small phones: allow smaller typography on non-iOS only to avoid zoom */
+@media (max-width: 480px) {
+  html:not(.ios) .form-compact input.input-field,
+  html:not(.ios) .form-compact select.input-field {
+    font-size: 14px !important;
+    min-height: 36px !important;
+    padding: 8px 10px !important;
+  }
+
+  html:not(.ios) .form-compact select.input-field {
+    padding-right: 2.25rem !important;
+    background-position: right 0.6rem center !important;
+  }
+
+  html:not(.ios) .form-compact textarea.input-field {
+    font-size: 14px !important;
+    min-height: 160px !important; /* keep textarea comfortably large */
+    padding: 8px 10px !important;
+    line-height: 1.45 !important;
+  }
+
+  html:not(.ios) .form-compact .input-label { font-size: 0.85rem !important; }
+  html:not(.ios) .form-compact .input-helper-text { font-size: 0.75rem !important; }
+}
+
+/* OPTIONAL: Force smaller input/select text even on iOS (may cause iOS zoom on focus) */
+@media (max-width: 768px) {
+  .form-compact.form-compact--force-small input.input-field,
+  .form-compact.form-compact--force-small select.input-field,
+  .form-compact.form-compact--force-small textarea.input-field,
+  .form-compact.form-compact--force-small .input-with-icon input,
+  .form-compact.form-compact--force-small input[type="date"].input-field {
+    font-size: 15px !important;
+  }
+
+  .form-compact.form-compact--force-small input.input-field::placeholder,
+  .form-compact.form-compact--force-small textarea.input-field::placeholder {
+    font-size: 15px !important;
+  }
+
+  .form-compact.form-compact--force-small .input-label { font-size: 0.85rem !important; }
+  .form-compact.form-compact--force-small .input-helper-text { font-size: 0.75rem !important; }
+}
+
+@media (max-width: 480px) {
+  .form-compact.form-compact--force-small input.input-field,
+  .form-compact.form-compact--force-small select.input-field,
+  .form-compact.form-compact--force-small textarea.input-field,
+  .form-compact.form-compact--force-small .input-with-icon input,
+  .form-compact.form-compact--force-small input[type="date"].input-field {
+    font-size: 14px !important;
+  }
+
+  .form-compact.form-compact--force-small input.input-field::placeholder,
+  .form-compact.form-compact--force-small textarea.input-field::placeholder {
+    font-size: 14px !important;
+  }
+
+  .form-compact.form-compact--force-small .input-label { font-size: 0.8rem !important; }
+  .form-compact.form-compact--force-small .input-helper-text { font-size: 0.7rem !important; }
+}

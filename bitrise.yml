@@ -1,0 +1,178 @@
+---
+format_version: '13'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+app:
+  envs:
+  - BITRISE_PROJECT_PATH: ios/App/App.xcworkspace
+  - BITRISE_SCHEME: App
+  - BITRISE_DISTRIBUTION_METHOD: development
+
+workflows:
+  build:
+    description: |
+      Build and test iOS app
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@8: {}
+    - script@1:
+        title: Install Node dependencies
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npm install
+    - script@1:
+        title: Build web app
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npm run build
+    - script@1:
+        title: Sync Capacitor
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npx cap sync ios
+    - cocoapods-install@2:
+        inputs:
+        - source_root_path: "$BITRISE_SOURCE_DIR/ios/App"
+        - podfile_path: "$BITRISE_SOURCE_DIR/ios/App/Podfile"
+    - xcode-build-for-test@2:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - destination: "platform=iOS Simulator,name=iPhone 15,OS=latest"
+    - deploy-to-bitrise-io@2: {}
+
+  test:
+    description: |
+      Test iOS app with modern simulator
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@8: {}
+    - script@1:
+        title: Install Node dependencies
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npm install
+    - script@1:
+        title: Build web app
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npm run build
+    - script@1:
+        title: Sync Capacitor
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npx cap sync ios
+    - cocoapods-install@2:
+        inputs:
+        - source_root_path: "$BITRISE_SOURCE_DIR/ios/App"
+        - podfile_path: "$BITRISE_SOURCE_DIR/ios/App/Podfile"
+    - xcode-build-for-test@2:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - destination: "platform=iOS Simulator,name=iPhone 15,OS=latest"
+    - deploy-to-bitrise-io@2: {}
+
+  primary:
+    description: |
+      Build iOS IPA for Weddfin app
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@8: {}
+    - script@1:
+        title: Install Node dependencies
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npm install
+    - script@1:
+        title: Build web app
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npm run build
+    - script@1:
+        title: Sync Capacitor
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npx cap sync ios
+    - certificate-and-profile-installer@1: {}
+    - cocoapods-install@2:
+        inputs:
+        - source_root_path: "$BITRISE_SOURCE_DIR/ios/App"
+        - podfile_path: "$BITRISE_SOURCE_DIR/ios/App/Podfile"
+    - xcode-build-for-test@2:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - destination: "platform=iOS Simulator,name=iPhone 15,OS=latest"
+    - xcode-archive@5:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - distribution_method: "$BITRISE_DISTRIBUTION_METHOD"
+        - automatic_code_signing: api-key
+    - deploy-to-bitrise-io@2: {}
+
+  android:
+    description: |
+      Build Android APK for Weddfin app
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@8: {}
+    - script@1:
+        title: Install Node dependencies
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npm install
+    - script@1:
+        title: Build web app
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npm run build
+    - script@1:
+        title: Sync Capacitor
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            npx cap sync android
+    - install-missing-android-tools@3:
+        inputs:
+        - gradlew_path: "$BITRISE_SOURCE_DIR/android/gradlew"
+    - android-build@1:
+        inputs:
+        - project_location: "$BITRISE_SOURCE_DIR/android"
+        - module: app
+        - variant: release
+    - deploy-to-bitrise-io@2: {}
+
+trigger_map:
+- push_branch: main
+  workflow: build
+- pull_request_source_branch: "*"
+  workflow: build
